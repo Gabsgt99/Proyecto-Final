@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import connectDB from './config/bd.js';
+import authRoute from './routes/authRoute.js';
 
 //configure env
 dotenv.config();
@@ -9,12 +10,15 @@ dotenv.config();
 //database config
 connectDB();
 
-//rest objrect
+//rest object
 const app = express();
 
 //middlewares
 app.use(express.json());
 app.use(morgan('dev'));
+
+//routes
+app.use("/api/v1/auth", authRoute);
 
 // rest api
 app.get('/', (req,res) =>{
