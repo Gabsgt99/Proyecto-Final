@@ -1,19 +1,30 @@
 import express from 'express';
+import dotenv from 'dotenv';
+import morgan from 'morgan';
+import connectDB from './config/bd.js';
+
+//configure env
+dotenv.config();
+
+//database config
+connectDB();
 
 //rest objrect
 const app = express();
 
+//middlewares
+app.use(express.json());
+app.use(morgan('dev'));
+
 // rest api
 app.get('/', (req,res) =>{
-    res.send({
-        message: 'Bienvenido al gestor de salas'
-    });
+    res.send("<h1>Bienvenido al gestor de salas</h1>");
 });
 
 //PORT
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 //run listen
 app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`);
+    console.log(`Server running on ${process.env.DEV_MODE} mode on ${PORT}`);
 });
