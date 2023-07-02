@@ -28,6 +28,7 @@ function App() {
           <Route path='/cabina1' element={ <Cabina1Page />} />
           <Route path='/dashboardadmin' element={ <DashboardAdmin />} />
           <Route path='/dashboard' element={ <DashboardUser />} />
+          
         </Routes>
     </Router>
   );
