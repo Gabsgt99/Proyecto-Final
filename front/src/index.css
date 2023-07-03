@@ -6,6 +6,36 @@
   font-family: 'Poppins', sans-serif;
 }
 
+
+/* LOGIN PAGE */
+
+.col, .col-sm-6{
+  padding: 0;
+}
+
+.col-login{
+  background-color:  #ff4702;
+}
+
+
+.icon-code{
+  color: #ff4702;
+  font-size: 150px;
+
+}
+
+
+.btn-dark {
+  background-color: black;
+  color: white;
+}
+
+.btn-white {
+  background-color: white;
+  color: black;
+}
+
+
 /* HOME PAGE */
 
 .room{
