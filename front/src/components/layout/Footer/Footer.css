@@ -32,13 +32,13 @@ footer {
 
 span {
   font-size: 13px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
   color: white;
 }
 
 .footer-links a {
   font-size: 13px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
   color: white;
   text-decoration: none;
 }
