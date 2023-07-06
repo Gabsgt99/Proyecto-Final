@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './img/logof5.png';
 import './Footer.css'
 import {Link} from 'react-router-dom'
 
@@ -9,7 +8,7 @@ const Footer = () => {
     <>    
      <footer>
       <div className="logo">
-        <img src={logo} alt="Logo" />
+        <img src="front\src\Assets\logof5.png" alt="Logo" />
       </div>
       <div className="footer-links">
         <ul>
@@ -18,35 +17,35 @@ const Footer = () => {
           </li>
           <li>|</li>
           <li>
-            <Link to="#">Aviso legal</Link>
+            <Link to="https://factoriaf5.org/aviso-legal/">Aviso legal</Link> 
           </li>
           <li>|</li>
           <li>
-            <Link to="#">Políticas de privacidad</Link>
+            <Link to="https://factoriaf5.org/politica-de-privacidad/">Políticas de privacidad</Link>
           </li>
           <li>|</li>
           <li>
-            <Link to="#">Políticas de Cookies</Link>
+            <Link to="https://factoriaf5.org/politica-de-cookies/">Políticas de Cookies</Link>
           </li>
           <li>|</li>
           <li>
-            <Link to="#">Contacto</Link>
+            <Link to="https://factoriaf5.org/contacto/">Contacto</Link>
           </li>
           <li>|</li>
           <li>
-            <Link to="#">Transparencia</Link>
+            <Link to="https://factoriaf5.org/somos/#transpariencia">Transparencia</Link>
           </li>
           <li>|</li>
           <li>
-            <Link to="#">Blog</Link>
+            <Link to="https://factoriaf5.org/blog/">Blog</Link>
           </li>
           <li>|</li>
           <li>
-            <Link to="#">Diseño Web Barcelona</Link>
+            <Link to="https://www.crixa.es/" target="_blank" rel="noopener">Diseño Web Barcelona</Link>
           </li>
         </ul>
       </div>
-    </footer>
+    </footer>   
     </>
   );
 };
