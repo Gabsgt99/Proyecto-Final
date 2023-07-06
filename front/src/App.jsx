@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import React from "react";
 import HomePage from "./pages/HomePage"
-import LoginPage from "./pages/LoginPage"
+import LoginPage from "./pages/Auth/LoginPage"
 import EquipoPage from "./pages/EquipoPage"
 import ReunionPage from "./pages/ReunionPage";
 import MaryLeePage from "./pages/MaryLeePage";
@@ -15,7 +15,7 @@ import RegisterPage from "./pages/RegisterPage";
 function App() {
 
   return (
-    <Router>
+  
         <Routes>
           <Route path="/"exact element={<HomePage />}/>
           <Route path="/login" element={<LoginPage />}/> 
@@ -27,7 +27,7 @@ function App() {
           <Route path='/cabina1' element={ <Cabina1Page />} />
           <Route path='/registro' element={ <RegisterPage />} />
         </Routes>
-    </Router>
+
   );
 };
 

@@ -1,36 +1,55 @@
 import React, { useState } from 'react';
-import loginImg from "../Assets/LoginImg.png";
+import loginImg from "../../Assets/LoginImg.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
+import Layout from '../../components/Layout/Layout';
+import axios from "axios"
+import { useAuth } from '../../components/context/Auth';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+
 
 
 function LoginPage() {
-  const [usernameOrEmail, setUsernameOrEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isClicked, setIsClicked] = useState(false);
+  const [auth, setAuth] = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleUsernameOrEmailChange = (e) => {
-    setUsernameOrEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+ 
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Username or Email:', usernameOrEmail);
-    console.log('Password:', password);
+    try {
+      const res = await axios.post("/api/b1/auth/login",{
+       email,
+       password 
+      })
+      if (res && res.data.success){
+        //colocar alerta de "usted se ha logueado correctamente"
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token
+        });
+        localStorage.setItem('auth', JSON.stringify(res.data));
+        navigate(location.state || "/");
+      } else {/*  msj de ha habido algun error con el login */}
+    } catch (error) {
+      console.log(error)
+      /*aqui va un msj de error*/
+    }
+    
     setIsClicked(true);
 
-    // Simulando una petición al servidor
-    setTimeout(() => {
-      setIsClicked(false);
-    }, 1000);
   };
 
+
+
+
+
   return (
-    <>
+    <Layout>
       <div className="container-fluid">
         <div className="row">
           <div className="col ">
@@ -51,14 +70,15 @@ function LoginPage() {
           <div className="col-sm-6 bg-white p-5">
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="usernameOrEmailInput" className="form-label">Usuario o email</label>
+                <label htmlFor="userEmailInput" className="form-label">Email</label>
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
-                  id="usernameOrEmailInput"
-                  placeholder="Ingresa tu usuario o email"
-                  value={usernameOrEmail}
-                  onChange={handleUsernameOrEmailChange}
+                  id="userEmailInput"
+                  placeholder="Ingresa tu email"
+                  value={email}
+                  onChange={(e) => setEmail (e.target.value)}
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -69,23 +89,24 @@ function LoginPage() {
                   id="passwordInput"
                   placeholder="Ingresa tu contraseña"
                   value={password}
-                  onChange={handlePasswordChange}
+                  onChange={(e) => setPassword (e.target.value)}
+                  required
                 />
               </div>
               <button
                 type="submit"
                 className={`btn ${isClicked ? 'btn-white' : 'btn-dark'}`}
-                onClick={handleSubmit}
+                /* onClick={handleSubmit} */
               >
                 Iniciar sesión
               </button>
 
-              <p className='p-2'>¿Has olvidado tu contraseña?</p>
+              <Link to = {"/forgot-password"}><p className='p-2'>¿Has olvidado tu contraseña?</p></Link>
             </form>
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 
