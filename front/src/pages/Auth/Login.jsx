@@ -9,7 +9,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
 
-function LoginPage() {
+function Login () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isClicked, setIsClicked] = useState(false);
@@ -21,7 +21,7 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/b1/auth/login",{
+      const res = await axios.post("/api/v1/auth/login",{
        email,
        password 
       })
@@ -110,4 +110,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login

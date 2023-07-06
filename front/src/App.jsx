@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import React from "react";
 import HomePage from "./pages/HomePage"
-import LoginPage from "./pages/Auth/LoginPage"
+import Login from "./pages/Auth/Login"
 import EquipoPage from "./pages/EquipoPage"
 import ReunionPage from "./pages/ReunionPage";
 import MaryLeePage from "./pages/MaryLeePage";
@@ -18,7 +18,7 @@ function App() {
   
         <Routes>
           <Route path="/"exact element={<HomePage />}/>
-          <Route path="/login" element={<LoginPage />}/> 
+          <Route path="/login" element={<Login />}/> 
           <Route path="/salaequipo" element={<EquipoPage />}/>
           <Route path="/salareunion" element={<ReunionPage />}/>
           <Route path="/salamarylee" element={<MaryLeePage />}/>
