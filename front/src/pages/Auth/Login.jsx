@@ -3,50 +3,40 @@ import loginImg from "../../Assets/LoginImg.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
 import Layout from '../../components/Layout/Layout';
-import axios from "axios"
+import axios from "axios";
 import { useAuth } from '../../components/context/Auth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-
-
-function Login () {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isClicked, setIsClicked] = useState(false);
   const [auth, setAuth] = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/auth/login",{
-       email,
-       password 
-      })
-      if (res && res.data.success){
-        //colocar alerta de "usted se ha logueado correctamente"
+      const res = await axios.post("/api/v1/auth/login", {
+        email,
+        password
+      });
+      if (res && res.data.success) {
         setAuth({
           ...auth,
           user: res.data.user,
           token: res.data.token
         });
         localStorage.setItem('auth', JSON.stringify(res.data));
-        navigate(location.state || "/");
-      } else {/*  msj de ha habido algun error con el login */}
+        navigate(location.state || "/registro");
+      } else {
+        /* Mensaje de error con el inicio de sesión */
+      }
     } catch (error) {
-      console.log(error)
-      /*aqui va un msj de error*/
+      console.log(error);
+      /* Mensaje de error con el inicio de sesión */
     }
-    
-    setIsClicked(true);
-
   };
-
-
-
-
 
   return (
     <Layout>
@@ -58,7 +48,7 @@ function Login () {
         </div>
         <div className="row text-center">
           <div className="col col-login py-5 fs-1 fw-bold text-white">
-           Login
+            Login
           </div>
         </div>
 
@@ -77,7 +67,7 @@ function Login () {
                   id="userEmailInput"
                   placeholder="Ingresa tu email"
                   value={email}
-                  onChange={(e) => setEmail (e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
@@ -85,23 +75,20 @@ function Login () {
                 <label htmlFor="passwordInput" className="form-label">Contraseña</label>
                 <input
                   type="password"
-                  className="form-control "
+                  className="form-control"
                   id="passwordInput"
                   placeholder="Ingresa tu contraseña"
                   value={password}
-                  onChange={(e) => setPassword (e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
-              <button
-                type="submit"
-                className={`btn ${isClicked ? 'btn-white' : 'btn-dark'}`}
-                /* onClick={handleSubmit} */
-              >
+              <button type="submit" className="btn btn-primary">
                 Iniciar sesión
               </button>
-
-              <Link to = {"/forgot-password"}><p className='p-2'>¿Has olvidado tu contraseña?</p></Link>
+              <Link to="/forgot-password">
+                <p className="p-2">¿Has olvidado tu contraseña?</p>
+              </Link>
             </form>
           </div>
         </div>
@@ -110,4 +97,4 @@ function Login () {
   );
 }
 
-export default Login
+export default Login;
