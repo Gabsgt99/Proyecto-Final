@@ -9,8 +9,9 @@
 
 /* LOGIN PAGE */
 
-.col, .col-sm-6{
+.col-sm-6, .col-12{
   padding: 0;
+
 }
 
 .col-login{
@@ -36,6 +37,12 @@
   color: black;
 }
 
+.orange-space{
+  height: 9rem;
+  width: 100%;
+  background-color: #ff4702;
+}
+
 
 /* HOME PAGE */
 
@@ -49,7 +56,10 @@ h1{
   color: #ff4702;
 }
 
+.cabina{
+  height: 50vh;
 
+}
 
 /* REGISTER PAGE */
 
