@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
 import Layout from '../../components/Layout/Layout';
 import axios from "axios";
-import { useAuth } from '../../components/context/Auth';
+import { useAuth } from '../../components/context/AuthContext';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 function Login() {
@@ -28,7 +28,7 @@ function Login() {
           token: res.data.token
         });
         localStorage.setItem('auth', JSON.stringify(res.data));
-        navigate(location.state || "/registro");
+        navigate(location.state || "/");
       } else {
         /* Mensaje de error con el inicio de sesión */
       }

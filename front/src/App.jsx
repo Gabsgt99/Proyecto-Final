@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import React from "react";
 import HomePage from "./pages/HomePage"
 import Login from "./pages/Auth/Login"
@@ -25,7 +25,7 @@ function App() {
           <Route path='/salahedylamar' element={ <HedyLamarPage />} />
           <Route path='/cabina0' element={ <Cabina0Page />} />
           <Route path='/cabina1' element={ <Cabina1Page />} />
-          <Route path='/registro' element={ <RegisterPage />} />
+          <Route path='/register' element={ <RegisterPage />} />
         </Routes>
 
   );

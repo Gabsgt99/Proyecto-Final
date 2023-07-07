@@ -1,46 +1,69 @@
-import {React, useState} from 'react';
+import React, {useState} from 'react';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
  
 function RegisterPage() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+  /* const [formData, setFormData] = useState({
+    name: '',
+    lastname: '',
     email: '',
     isAdmin: false,
   });
+   */
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
+  /* const [modalVisible, setModalVisible] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(''); */
+
+  /* const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
     const fieldValue = type === 'checkbox' ? checked : value;
 
     setFormData((prevData) => ({
       ...prevData,
       [name]: fieldValue,
     }));
-  };
+  }; */
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Verificar si hay campos vacíos
-    const { firstName, lastName, email } = formData;
-    if (firstName.trim() === '' || lastName.trim() === '' || email.trim() === '') {
-      return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/api/v1/auth/register", {
+        name,
+	      lastname,
+        email,
+        password
+      });
+      if (res && res.data.success) {
+        /* alert.success(res.data && res.data.message); */ //<===aqui va un mensaje popup de exito en el registro ======
+        navigate("/"); //Aqui poner a donde va despues del registro==========
+      } else {
+     //<===aqui va un mensaje popup
+     console.log(name,lastname,email,password)
+      }
+    } catch (error) {
+      console.log(error);
+      //<===aqui va un mensaje popup
     }
 
+
+
     // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor
-    setSuccessMessage('Ha registrado correctamente al usuario');
-    setModalVisible(true);
+    /* setSuccessMessage('Ha registrado correctamente al usuario');
+    setModalVisible(true); */
   };
 
-  const closeModal = () => {
+  /* const closeModal = () => {
     setModalVisible(false);
     setSuccessMessage('');
-  };
+  }; */
 
   return (
     <div className="container-fluid">
@@ -54,9 +77,10 @@ function RegisterPage() {
                 className="form-control"
                 id="firstName"
                 name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
+                autoFocus
               />
             </div>
             <div className="form-group py-3">
@@ -66,9 +90,10 @@ function RegisterPage() {
                 className="form-control"
                 id="lastName"
                 name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
                 required
+                autoFocus
               />
             </div>
             <div className="form-group py-3">
@@ -78,24 +103,38 @@ function RegisterPage() {
                 className="form-control"
                 id="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
+                autoFocus
               />
             </div>
-            <div className="form-group form-check py-3">
+            <div className="form-group py-3">
+              <label htmlFor="password">Contraseña</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoFocus
+              />
+            </div>
+           {/*  <div className="form-group form-check py-3">
               <input
                 type="checkbox"
                 className="form-check-input"
                 id="isAdmin"
                 name="isAdmin"
-                checked={formData.isAdmin}
+                checked={isAdmin}
                 onChange={handleChange}
               />
               <label className="form-check-label" htmlFor="isAdmin">
                 ¿Es Admin?
               </label>
-            </div>
+            </div> */}
             <button type="submit" className="btn btn-register">
               Registrarse
             </button>
@@ -104,7 +143,7 @@ function RegisterPage() {
       </div>
 
       {/* Modal de éxito */}
-      {modalVisible && (
+      {/* {modalVisible && (
         <div className="modal" tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -119,8 +158,8 @@ function RegisterPage() {
               </div>
             </div>
           </div>
-        </div>
-      )}
+        </div> */}
+      
     </div>
   );
 }
