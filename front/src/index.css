@@ -1,13 +1,116 @@
-body {
+ @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+/* LOGIN PAGE */
+
+.col-sm-6, .col-12{
+  padding: 0;
+
+}
+
+.col-login{
+  background-color:  #ff4702;
+}
+
+
+.icon-code{
+  color: #ff4702;
+  font-size: 150px;
+
+}
+
+
+.btn-dark {
+  background-color: black;
+  color: white;
+  
+}
+
+.btn-white {
+  background-color: white;
+  color: black;
+}
+
+.orange-space{
+  height: 9rem;
+  width: 100%;
+  background-color: #ff4702;
+}
+
+
+/* HOME PAGE */
+
+.room{
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+h1{
+  color: #ff4702;
+}
+
+.cabina{
+  height: 50vh;
+
+}
+
+/* REGISTER PAGE */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 400px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.close {
+  cursor: pointer;
+}
+
+.btn-register {
+
+  background-color: #020100;
+  color:#ffffff;
+  border-color: #020100;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5)
+}
+
+.btn-register:hover {
+  background-color: #ffffff;
+  color: #020100;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 }
