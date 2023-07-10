@@ -6,7 +6,7 @@ const roomModelSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    aforo: {
+    capacity: {
       type: Number,
       required: true,
     },

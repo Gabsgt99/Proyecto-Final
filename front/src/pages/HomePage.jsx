@@ -9,6 +9,8 @@ import Layout from '../components/Layout/Layout';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import Calendar from '../components/Calendar/FullCalendar'; 
+
 
 
 
@@ -17,6 +19,7 @@ const HomePage = () => {
   return ( <>
 
         <Layout>
+          <Calendar></Calendar>
         <div className="container-fluid">
   <div className="row">
 
