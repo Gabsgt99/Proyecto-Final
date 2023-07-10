@@ -1,35 +1,37 @@
-import React from 'react';
-import { Header } from '../components/layout/Header/Header';
-import Footer from '../components/layout/Footer/Footer';
-import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router-dom';
-import '../App.css';
+import React from "react";
+import Layout from "../components/Layout/Layout";
+import { useNavigate } from "react-router-dom";
+import "../App.css";
 
 export function Cabina1Page() {
- 
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleReservar = () => {
     // Lógica para reservar
-    console.log('Botón Reservar clickeado');
+    history.push("/");
+    console.log("Botón reservar clickeado");
   };
 
   const handleEditar = () => {
     // Lógica para editar
-    console.log('Botón Editar clickeado');
+    history.push("/");
+    console.log("Botón Editar clickeado");
   };
 
   return (
     <>
-      <Header></Header>
+      <Layout>
 
       <div className="body-container">
         <div className="photo">
-          <img src="front\src\pages\Cabina1Page.jsx" alt="Cabina-1" />
+          <img src="front\src\Assets\Cabina1.png" alt="Cabina 1" />
         </div>
 
         <div className="text">
-          <p>Cabina 1, cabina para reuniones personales o clases online que tienen un poco más de privacidad</p>
+          <p>
+            Cabina 1, cabina para reuniones personales o clases online que
+            tienen un poco más de privacidad
+          </p>
         </div>
 
         <div className="buttons">
@@ -37,10 +39,10 @@ export function Cabina1Page() {
           <button onClick={handleEditar}>Editar</button>
         </div>
       </div>
-
-      <Footer></Footer>
+      </Layout>
+   
     </>
   );
-};
+}
 
 export default Cabina1Page;

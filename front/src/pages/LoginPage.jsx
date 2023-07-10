@@ -34,7 +34,7 @@ function LoginPage() {
       <div className="container-fluid">
         <div className="row">
           <div className="col ">
-            <img src={loginImg} className="img-fluid" width="100%" alt="laptop login image" />
+            <img src={loginImg} className="img-fluid" width="100%" alt="laptop login imagin" />
           </div>
         </div>
         <div className="row text-center">

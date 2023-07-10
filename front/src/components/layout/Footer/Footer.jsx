@@ -1,14 +1,14 @@
 import React from 'react';
 import './Footer.css'
 import {Link} from 'react-router-dom'
-
+import logof5 from '../../../Assets/logof5.png';
 
 const Footer = () => {
   return (
     <>    
      <footer>
       <div className="logo">
-        <img src="front\src\Assets\logof5.png" alt="Logo" />
+        <img src={logof5} alt="Logo" />
       </div>
       <div className="footer-links">
         <ul>
