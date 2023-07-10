@@ -2,141 +2,96 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import Logo from "../../../Assets/Logo.png";
-import {  faTwitter, faInstagram, faYoutube, faFacebook} from '@fortawesome/fontawesome-svg-core';
-import { faTwitter, faInstagram, faYoutube, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faTwitter, faInstagram, faYoutube, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-// Agrega los iconos Link la biblioteca
 
 library.add(faLinkedin, faTwitter, faInstagram, faYoutube, faFacebook);
 
 export function Header() {
   return (
+    
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <nav className="container-fluid">
-        {/* Logo */}
-        <div className="header-logo">
+      <div className="container-fluid header-container">
+
+         {/* Logo */}
+         <div className="header-logo">
           <img className="Logo" src={Logo} alt="Logo" />
         </div>
-const 
-        {/*Iconos RRSS*/}
-        <div class="fusion-alignright">
-          <div class="fusion-social-links-header">
-            <div class="fusion-social-networks">
-              <div class="fusion-social-networks-wrapper">
-                <Link
-                  class="fusion-social-network-icon fusion-tooltip fusion-linkedin awb-icon-linkedin"
-                  style="color: black"
-                  data-placement="bottom"
-                  data-title="LinkedIn"
-                  data-toggle="tooltip"
-                  title=""
-                  to="https://www.linkedin.com/company/factor%C3%ADaf5/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-original-title="LinkedIn"
-                >
-                  <span class="screen-reader-text">LinkedIn</span>
-                </Link>
-                <Link
-                  class="fusion-social-network-icon fusion-tooltip fusion-twitter awb-icon-twitter"
-                  style="color: black"
-                  data-placement="bottom"
-                  data-title="Twitter"
-                  data-toggle="tooltip"
-                  title=""
-                  to="https://twitter.com/factoriaf5"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-original-title="Twitter"
-                >
-                  <span class="screen-reader-text">Twitter</span>
-                </Link>
-                <Link
-                  class="fusion-social-network-icon fusion-tooltip fusion-instagram awb-icon-instagram"
-                  style="color: black"
-                  data-placement="bottom"
-                  data-title="Instagram"
-                  data-toggle="tooltip"
-                  title=""
-                  to="https://www.instagram.com/factoria_f5/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-original-title="Instagram"
-                >
-                  <span class="screen-reader-text">Instagram</span>
-                </Link>
-                <Link
-                  class="fusion-social-network-icon fusion-tooltip fusion-youtube awb-icon-youtube"
-                  style="color: black"
-                  data-placement="bottom"
-                  data-title="YouTube"
-                  data-toggle="tooltip"
-                  title=""
-                  to="https://www.youtube.com/channel/UCazHbN7ChOJxRXW0-K1zczw"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-original-title="YouTube"
-                >
-                  <span class="screen-reader-text">YouTube</span>
-                </Link>
-                <Link
-                  class="fusion-social-network-icon fusion-tooltip fusion-facebook awb-icon-facebook"
-                  style="color: black"
-                  data-placement="bottom"
-                  data-title="Facebook"
-                  data-toggle="tooltip"
-                  title=""
-                  to="https://www.facebook.com/factoriaf5/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-original-title="Facebook"
-                >
-                  <span class="screen-reader-text">Facebook</span>
-                </Link>
-              </div>
-            </div>
-          </div>{" "}
-          </div>
 
-        {/* Toggle Button and Navigation */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo02"
-          aria-controls="#navbarTogglerDemo02"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div className="collapse navbar-collapse" id="navbarToggler">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="Header.jsx">
+                to="/"
+              >
                 Home
               </Link>
             </li>
-
             <li className="nav-item">
-              <Link className="nav-link" to="LoginPage.jsx">
+              <Link className="nav-link" to="/LoginPage">
                 Usuario
               </Link>
             </li>
-
             <li className="nav-item">
-              <Link className="nav-link " to="https://factoriaf5.org/">
-                Cerrar sesion
+              <Link className="nav-link" to="https://factoriaf5.org/">
+                Cerrar sesión
               </Link>
             </li>
           </ul>
         </div>
-      </nav>
-</nav>
+        {/* Iconos RRSS */}
+        <div className="social-icons">
+          <Link to="https://www.linkedin.com/company/factor%C3%ADaf5/">
+            <FontAwesomeIcon
+              icon={faLinkedin}
+              className="social-icon"
+            />
+          </Link>
+          <Link to="https://twitter.com/factoriaf5">
+            <FontAwesomeIcon
+              icon={faTwitter}
+              className="social-icon"
+            />
+          </Link>
+          <Link to="http://instagram.com/factoria_f5/">
+            <FontAwesomeIcon
+              icon={faInstagram}
+              className="social-icon"
+            />
+          </Link>
+          <Link to="https://www.youtube.com/channel/UCazHbN7ChOJxRXW0-K1zczw">
+            <FontAwesomeIcon
+              icon={faYoutube}
+              className="social-icon"
+            />
+          </Link>
+          <Link to="https://www.facebook.com/factoriaf5/">
+            <FontAwesomeIcon
+              icon={faFacebook}
+              className="social-icon"
+            />
+          </Link>
+        </div>
+       
+        {/* Toggle Button and Navigation */}
+        <div className="header-toggler">
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggler"
+            aria-controls="navbarToggler"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        
+      </div>
+    </nav>
   );
 }
