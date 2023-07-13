@@ -1,54 +1,47 @@
 import roomModel from "../models/roomModel.js";
 import slugify from "slugify";
+import fs from "fs";
 
 export const createRoomController = async (req, res) => {
   try {
-    const { name, capacity, description } = req.body;
-    const { photo } = req.body;
-
-    if (!name) {
-      return res.status(401).send({ message: "Se requiere nombre de la sala" });
-    }
-    if (!capacity) {
-      return res.status(401).send({ message: "Se requiere capacidad de sala" });
-    }
-    if (!description) {
-      return res.status(401).send({ message: "Se requiere descripción de la sala" });
-    }
-    if (photo && photo.size > 1000000) {
-      return res
-        .status(401)
-        .send({ error: "La foto es requerida y debe ser menor a 1 MB" });
-    }
-    const room = new roomModel({ name, slug: slugify(name) });
-    if (photo) {
-      room.photo.data = fs.readFileSync(photo.path);
-      room.photo.contentType = photo.type;
-    }
+    //const { fields, files } = req;
     
-    const existingRoom = await roomModel.findOne({ name });
-    if (existingRoom) {
-      return res.status(200).send({
-        success: false,
-        message: "Una sala con ese nombre ya existe",
-      });
-    }
-    /*const room = await new roomModel({
-      name,
-      slug: slugify(name,capacity,description),
-    }).save();
-    res.status(201).send({
+//if (!fields) {
+     // return res.status(500).send({ error: "Se requiere nombre de la sala" });
+    //}
+    
+    const { name, capacity, description } = req.body;
+    //const { photo } = files;
+    
+    // Validación adicional
+    //if (photo && photo.size > 1000000) {
+      //return res.status(500).send({ error: "La foto es requerida y debe ser menor a 1 MB" });
+    //}
+    
+    //const slug = slugify(name);
+    //const room = new roomModel({ name, capacity, description, slug });
+    const room = new roomModel({ name, capacity, description});
+    
+    ////room.photo.data = fs.readFileSync(photo.path);
+      //room.photo.contentType = photo.type;
+    //}
+    
+    const savedRoom = await room.save();
+
+    res.json(savedRoom)
+    
+    /*res.status(201).send({
       success: true,
-      message: "Nueva sala creada",
+      message: "La sala ha sido creada satisfactoriamente",
       room,
-    })*/
+    });*/
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
       error,
-      message: "Error de sala",
-    }); 
+      message: "Error al crear la sala",
+    });
   }
 };
 
