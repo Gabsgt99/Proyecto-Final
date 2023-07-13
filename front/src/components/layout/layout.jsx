@@ -1,18 +1,21 @@
 import React from 'react';
 import Footer from './Footer/Footer.jsx';
 import { Header } from './Header/Header.jsx';
+import { Navbar } from './Navbar/Navbar.jsx';
+import BurguerButton from './BurguerButton/BurguerButton.jsx';
 
-
-const Layout = ({ children,title,description,keywords,author }) => {
-    return(
+function Layout({ children, title, description, keywords, author }) {
+    return (
         <div>
-            <Header/>
-            <main style={{minHeight:'70vh'}}>
-            {children}</main>
-            <Footer/>
+            <Header />
+            <Navbar />
+            <BurguerButton />
+            <main style={{ minHeight: '70vh' }}>
+                {children}</main>
+            <Footer />
         </div>
-    )
-};
+    );
+}
 
 Layout.defaultProps = {
     title:'Gestion Salas',

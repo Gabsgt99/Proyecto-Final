@@ -9,38 +9,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 library.add(faLinkedin, faTwitter, faInstagram, faYoutube, faFacebook);
 
 export function Header() {
-  return (
+  return ( 
     
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid header-container">
 
          {/* Logo */}
-         <div className="header-logo">
+        <div className="header-logo">
           <img className="Logo" src={Logo} alt="Logo" />
-        </div>
-
-        <div className="collapse navbar-collapse" id="navbarToggler">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link
-                className="nav-link active"
-                aria-current="page"
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/LoginPage">
-                Usuario
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="https://factoriaf5.org/">
-                Cerrar sesión
-              </Link>
-            </li>
-          </ul>
         </div>
         {/* Iconos RRSS */}
         <div className="social-icons">
@@ -74,21 +50,6 @@ export function Header() {
               className="social-icon"
             />
           </Link>
-        </div>
-       
-        {/* Toggle Button and Navigation */}
-        <div className="header-toggler">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarToggler"
-            aria-controls="navbarToggler"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
         </div>
         
       </div>
