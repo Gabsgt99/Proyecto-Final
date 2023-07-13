@@ -15,12 +15,12 @@
 }
 
 .col-login{
-  background-color:  #ff4702;
+  background-color:  #ff4700;
 }
 
 
 .icon-code{
-  color: #ff4702;
+  color: #ff4700;
   font-size: 150px;
 
 }
@@ -40,7 +40,7 @@
 .orange-space{
   height: 9rem;
   width: 100%;
-  background-color: #ff4702;
+  background-color: #ff4700;
 }
 
 
@@ -53,7 +53,7 @@
 }
 
 h1{
-  color: #ff4702;
+  color: #ff4700;
 }
 
 .cabina{
@@ -112,5 +112,70 @@ h1{
 .btn-register:hover {
   background-color: #ffffff;
   color: #020100;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Edit-Profile*/
+.container {
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.link {
+  display:flex;
+  margin-top: 15px;
+  justify-content: end;
+  gap: 20px;
+  text-decoration: none;
+  color:rgb(141, 244, 39);
+}
+
+
+.container h1 {
+  text-align: center;
+  margin-top: 3rem;
+  color: #ff4700;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  gap: 200px;
+}
+
+.input-container {
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+label {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 500px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-button,
+.cancel-button {
+  margin-left: 100px;
+  padding: 5px;
+  border-radius: 10px;
+  margin-top:50px;
+}
+
+.save-button {
+  background-color: #ff4700;
+  color: #ffffff;
 }

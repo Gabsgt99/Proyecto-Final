@@ -1,15 +1,54 @@
-import React  from 'react';
+import React from 'react';
+import logof5 from '../../../Assets/logof5.png';
+import './Footer.css'
+import {Link} from 'react-router-dom'
+  const Footer = ()=> {  
+  return (  
+  <>    
+     <footer>
+      <div className="logo">
+        <img src={logof5} alt="Logo" />
+      </div>
+      <div className="footer-links">
+        <ul>
+
+          <li>
+            <Link to="https://factoriaf5.org/aviso-legal/">Aviso legal</Link>
+          </li>
+          <li>|</li>
+          <li>
+            <Link to="https://factoriaf5.org/politica-de-privacidad/">Políticas de privacidad</Link>
+          </li>
+          <li>|</li>
+          <li>
+            <Link to="https://factoriaf5.org/politica-de-cookies/">Políticas de Cookies</Link>
+          </li>
+          <li>|</li>
+          <li>
+            <Link to="https://factoriaf5.org/contacto/">Contacto</Link>
+          </li>
+          <li>|</li>
+          <li>
+            <Link to="https://factoriaf5.org/somos/#transpariencia">Transparencia</Link>
+          </li>
+          <li>|</li>
+          <li>
+            <Link to="https://factoriaf5.org/blog/">Blog</Link>
+          </li>
+          <li>|</li>
+          <li>
+            <Link to="https://www.crixa.es/" target="_blank" rel="noopener">Diseño Web Barcelona</Link>
+          </li>
+        </ul>
+      </div>
+    </footer>
+    </>
+  );
+};
+export default Footer;
 
 
-function Footer() {
-    
-    return (
-        <div>
-                FOOTER
-        </div>
-    )
 
-    
-}
 
-export default Footer
+
+        

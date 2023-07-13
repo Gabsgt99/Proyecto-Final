@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import loginImg from "../../Assets/LoginImg.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
-import Layout from '../../components/Layout/Layout.jsx';
+import Layout from '../../components/layout/Layout.jsx';
 import axios from "axios";
 import { useAuth } from '../../components/context/AuthContext';
 import { Link, useNavigate, useLocation } from 'react-router-dom';

@@ -5,7 +5,7 @@ import room3 from '../Assets/ROOM3.png'
 import room4 from '../Assets/ROOM4.png'
 import room5 from '../Assets/Cabina0.png'
 import room6 from '../Assets/Cabina1.png'
-import Layout from '../components/Layout/Layout';
+import Layout from '../components/layout/Layout';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -131,7 +131,6 @@ const HomePage = () => {
   </div>
 
         </Layout>
-    
           </> );      
 };
 
