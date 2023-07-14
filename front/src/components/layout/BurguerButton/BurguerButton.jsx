@@ -7,9 +7,9 @@ function BurguerButton(props) {
       <div  onClick={props.handleClick} 
             className={`icon nav-icon-5 ${props.clicked ? 'open' : ''}`}
       >
-        <span>Home</span>
-        <span>Usuario</span>
-        <span>Cerrar sesion</span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </Burguer>
   )
@@ -28,7 +28,7 @@ const Burguer = styled.div`
   display: inline-block;
 }
 .nav-icon-5 span{
-  background-color:#FF4700;
+  background-color:black;
   position: absolute;
   border-radius: 2px;
   transition: .3s cubic-bezier(.8, .5, .2, 1.4);
@@ -50,10 +50,10 @@ const Burguer = styled.div`
   left: 0px;
 }
 .nav-icon-5:not(.open):hover span:nth-child(1){
-  transform: rotate(-3deg) scaleY(1.1);
+  transform: rotate(-4deg) scaleY(1.1);
 }
 .nav-icon-5:not(.open):hover span:nth-child(2){
-  transform: rotate(3deg) scaleY(1.1);
+  transform: rotate(9deg) scaleY(1.1);
 }
 .nav-icon-5:not(.open):hover span:nth-child(3){
   transform: rotate(-4deg) scaleY(1.1);

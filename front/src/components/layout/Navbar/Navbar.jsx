@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import BurguerButton from '../BurguerButton/BurguerButton.jsx';
 
-function Navbar() {
-
+function Navbar  ()  {
+ 
   const [clicked, setClicked] = useState(false)
   const handleClick = () => {
     //cuando esta true lo pasa a false y vice versa
@@ -12,11 +12,11 @@ function Navbar() {
   return (
     <>
       <NavContainer>
-         <span></span>
+        <span></span>
         <div className={`links ${clicked ? 'active' : ''}`}>
           <a onClick={handleClick} href="/">Home</a>
           <a onClick={handleClick} href="/">Usuario</a>
-          <a onClick={handleClick} href="https://factoriaf5.org/">Cerrar sesion</a>
+          <a onClick={handleClick} href="https://factoriaf5.org/">Cerrar</a>
           
         </div>
         <div className='burguer'>
@@ -28,12 +28,12 @@ function Navbar() {
   )
 }
 
-export default Navbar;
+export default Navbar
 
 const NavContainer = styled.nav`
   span{
-    color: white;
-    font-weight: 400;
+    color: #ff4700;
+    font-weight: 200;
     span{
       font-weight: bold;
     }
@@ -44,10 +44,10 @@ const NavContainer = styled.nav`
   align-items: center;
   justify-content: space-between;
   a{
-    color: white;
+    color: black;
     text-decoration: none;
-    margin-right: 1rem;
-  }
+    margin-right: 3rem;
+  } 
   .links{
     position: absolute;
     top: -700px;
@@ -58,19 +58,24 @@ const NavContainer = styled.nav`
     text-align: center;
     transition: all .5s ease;
     a{
-      color: #ff4700;
-      font-size: 2rem;
+      color: white;
+      font-size: 1rem;
       display: block;
     }
     @media(min-width: 768px){
       position: initial;
-      margin: 0;
+      margin: 7px;
       a{
         font-size: 1rem;
-        color: #ff4700;
+        color: white;
+        transition: color 0.3s;
         display: inline;
+        cursor: pointer;
+       
       }
-      display: block;
+      a:hoover{
+        color: black;
+      }
     }
   }
 
@@ -84,8 +89,9 @@ const NavContainer = styled.nav`
     left: 0;
     right: 0;
     text-align: center;
+    margin-top: 10px;
     a{
-      font-size: 2rem;
+      font-size: 1rem;
       margin-top: 1rem;
       color: white;
     }
@@ -99,14 +105,14 @@ const NavContainer = styled.nav`
 `
 
 const BgDiv = styled.div`
-  background-color: #222;
+  background-color: #FF4700;
   position: absolute;
   top: -1000px;
   left: -1000px;
   width: 100%;
   height: 100%;
   z-index: -1;
-  transition: all .6s ease ;
+  transition: all .3s ease ;
   
   &.active{
     border-radius: 0 0 80% 0;

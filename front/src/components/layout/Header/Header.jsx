@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import Logo from "../../../Assets/Logo.png";
@@ -9,12 +9,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 library.add(faLinkedin, faTwitter, faInstagram, faYoutube, faFacebook);
 
 export function Header() {
-  return ( 
-    
+  const BurguerButton = () => {
+    const [clicked, setClicked] = useState(false)
+    const handleClick = () => {
+      setClicked(!clicked)
+    };
+
+    return (
+      <div className={`links ${clicked ? 'active' : ''}`}>
+        <a onClick={handleClick} href="#"></a>
+        <a onClick={handleClick} href="#"></a>
+        <a onClick={handleClick} href="#"></a>
+      </div>
+    );
+  }
+
+  return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid header-container">
 
-         {/* Logo */}
+        {/* Logo */}
         <div className="header-logo">
           <img className="Logo" src={Logo} alt="Logo" />
         </div>
@@ -51,7 +65,9 @@ export function Header() {
             />
           </Link>
         </div>
-        
+        <div className='burguer'>
+          <BurguerButton />
+        </div>
       </div>
     </nav>
   );

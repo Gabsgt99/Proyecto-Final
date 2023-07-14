@@ -1,15 +1,15 @@
 import React from 'react';
 import Footer from './Footer/Footer.jsx';
 import { Header } from './Header/Header.jsx';
-import { Navbar } from './Navbar/Navbar.jsx';
-import BurguerButton from './BurguerButton/BurguerButton.jsx';
+import Navbar from './Navbar/Navbar.jsx';
+
 
 function Layout({ children, title, description, keywords, author }) {
     return (
         <div>
             <Header />
             <Navbar />
-            <BurguerButton />
+            
             <main style={{ minHeight: '70vh' }}>
                 {children}</main>
             <Footer />
