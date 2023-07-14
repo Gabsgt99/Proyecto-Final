@@ -1,128 +1,75 @@
 import roomModel from "../models/roomModel.js";
 import slugify from "slugify";
 import fs from "fs";
+import path from "path";
 
 export const createRoomController = async (req, res) => {
   try {
-    //const { fields, files } = req;
-    
-//if (!fields) {
-     // return res.status(500).send({ error: "Se requiere nombre de la sala" });
-    //}
-    
+    console.log("estamos en el controlador")
     const { name, capacity, description } = req.body;
-    //const { photo } = files;
-    
-    // Validación adicional
-    //if (photo && photo.size > 1000000) {
-      //return res.status(500).send({ error: "La foto es requerida y debe ser menor a 1 MB" });
-    //}
-    
-    //const slug = slugify(name);
-    //const room = new roomModel({ name, capacity, description, slug });
-    const room = new roomModel({ name, capacity, description});
-    
-    ////room.photo.data = fs.readFileSync(photo.path);
-      //room.photo.contentType = photo.type;
-    //}
-    
-    const savedRoom = await room.save();
+    console.log(req.file.name)
+    console.log(req.body)
+    console.log(req.file)
+    const room = req.body 
+    room.photo = req.file.name
+    console.log(room)
+    //const { photo } = req.files;
+    //validation
+    switch(true) {
+      case !name:
+        return res.status(500).send ({error:'Se requiere nombre de la sala'})
+      case !capacity:
+        return res.status(500).send ({error:'Se requiere capacidad de la sala'})
+      case !description:
+        return res.status(500).send ({error:'Se requiere descripción de la sala'})
+      /*case photo && photo.size > 1000000:
+          return res
+            .status(500)
+            .send({ error: "photo is Required and should be less then 1mb" });
+    */}
 
-    res.json(savedRoom)
-    
-    /*res.status(201).send({
-      success: true,
-      message: "La sala ha sido creada satisfactoriamente",
-      room,
-    });*/
-  } catch (error) {
-    console.log(error);
+    const rooms = new roomModel (req.body)
+      rooms.photo = req.file.filename
+      console.log(rooms)
+    /*if (photo){
+      rooms.photo = fs.readFileSync(photo.path)
+      rooms.photo.contentType = photo.type
+    }*/
+    await rooms.save();
+    res.status(201).send({
+      success:true,
+      message: "La sala ha sido creada satifactoriamente",
+      rooms,
+    });
+  }catch(error){
+    console.log(error)
     res.status(500).send({
-      success: false,
+      success:false,
       error,
-      message: "Error al crear la sala",
+      message: 'Error al crear sala'
+    
     });
   }
 };
+export const getImage = (req, res) => {
+  //sacar el parametro de la url
+  const file = req.params.file;
 
-//update room
-export const updateRoomController = async (req, res) => {
-  try {
-    const { name } = req.body;
-    const { id } = req.params;
-    const category = await roomController.findByIdAndUpdate(
-      id,
-      { name, slug: slugify(name) },
-      { new: true }
-    );
-    res.status(200).send({
-      success: true,
-      messsage: "Sala actualizada con éxito",
-      category,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      error,
-      message: "Error al actualizar sala",
-    });
-  }
-};
+  // montar el path real de la imagen
 
-// get all room
-export const roomController = async (req, res) => {
-  try {
-    const category = await roomModel.find({});
-    res.status(200).send({
-      success: true,
-      message: "Lista de salas",
-      category,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      error,
-      message: "Error al obtener todas las salas",
-    });
-  }
-};
+  const filepath = "./images/" + file;
 
-// single room
-export const singleRoomController = async (req, res) => {
-  try {
-    const room = await roomModel.findOne({ slug: req.params.slug });
-    res.status(200).send({
-      success: true,
-      message: "Obtuviste una sala con éxito",
-      category,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      error,
-      message: "Error al obtener una sala con éxito",
-    });
-  }
-};
+  //comprobar que existe la imagen
 
-//delete room
-export const deleteRoomController = async (req, res) => {
-  try {
-    const { id } = req.params;
-    await roomModel.findByIdAndDelete(id);
-    res.status(200).send({
-      success: true,
-      message: "Sala eliminada con éxito",
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      message: "error al eliminar sala",
-      error,
-    });
-  }
+  fs.stat(filepath, (error, exists) => {
+    if (!exists)
+      return res.status(404).send({
+        status: "error",
+        message: "no existe la imagen",
+      });
+
+    //devolver file
+    return res.sendFile(path.resolve(filepath));
+  });
 };
+   

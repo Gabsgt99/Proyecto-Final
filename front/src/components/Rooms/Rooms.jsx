@@ -1,6 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { BiPencil, BiTrash } from "react-icons/bi";
+import axios from 'axios'
 
 function Rooms() {
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  const loadData = async () =>{
+    const answer = await axios.get('http://localhost:8080/api/v1/room/create-room')
+    console.log(answer)
+  }
+
   const [photo, setPhoto] = useState(null);
 
   const handlePhotoChange = (event) => {
@@ -18,7 +29,7 @@ function Rooms() {
     <div className="container">
       <h1 className="text-center">GESTIÓN DE SALAS</h1>
       <div className="row">
-        <div className="col-8">
+        <div className="col-9">
           <h3 className="text-center">Lista de salas</h3>
           <table className="table table-light">
             <thead>
@@ -27,6 +38,7 @@ function Rooms() {
                 <th>Nombre</th>
                 <th>Capacidad</th>
                 <th>Descripción</th>
+                <th>Foto</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -39,17 +51,20 @@ function Rooms() {
                   Aula destinada a la formación del alumnado que acude a los cursos y talleres de Factoría F5.
                 </td>
                 <td>
-                  <button className="btn btn-outline-dark">Editar</button>
+                  <img src="http://localhost:8080/api/v1/room/images/1689340730576-calendario.jpg" alt="Foto de sala" className="img-fluid" />
                 </td>
                 <td>
-                  <button className="btn btn-outline-secondary">Eliminar</button>
+                  <button className="btn btn-outline-dark"><BiPencil /></button>
+                </td>
+                <td>
+                  <button className="btn btn-outline-secondary"><BiTrash /></button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div className="col-4">
-          <h3>CRUD</h3>
+        <div className="col-3">
+          <h3>NUEVA SALA</h3>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">Nombre de la sala</label>
