@@ -1,10 +1,25 @@
 import React from 'react';
-
+import room3 from './../Assets/ROOM3.png'
+import RoomReservation from '../components/RoomReservation/RoomReservation';
+import ReservationForm from '../components/ReservationForm/ReservationForm';
 
 
 function MaryLeePage() {
   return ( <>
-        sala 2
+  <div className="container-fluid">
+
+<div className="row">
+  <div className="col-sm-6 col-lg-5 bg-success">
+    <img src={room3} className="room" alt="sala de reuniones" />
+  </div>
+
+   
+  <div className="col-sm-6 col-lg-5">
+    <RoomReservation />
+  </div>
+
+    </div>
+    </div>
           </> );      
 };
 
