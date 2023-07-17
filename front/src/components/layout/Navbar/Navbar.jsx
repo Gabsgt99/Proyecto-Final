@@ -14,15 +14,15 @@ function Navbar  ()  {
       <NavContainer>
         <span></span>
         <div className={`links ${clicked ? 'active' : ''}`}>
-          <a onClick={handleClick} href="/">Home</a>
-          <a onClick={handleClick} href="/">Usuario</a>
-          <a onClick={handleClick} href="https://factoriaf5.org/">Cerrar</a>
+          <a onClick={handleClick} href="/">HOME</a>
+          <a onClick={handleClick} href="/">USUARIO</a>
+          <a onClick={handleClick} href="https://factoriaf5.org/">CERRAR</a>
           
         </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>
-        <BgDiv className={`initial ${clicked ? ' active' : ''}`}></BgDiv>
+        <BgDiv id="BgDiv" className={`initial ${clicked ? ' active' : ''}`}></BgDiv>
       </NavContainer>
     </>
   )
@@ -38,7 +38,7 @@ const NavContainer = styled.nav`
       font-weight: bold;
     }
   }
-  padding: .4rem;
+  padding: .1rem;
   background-color: #ff4700;
   display: flex;
   align-items: center;
@@ -98,10 +98,18 @@ const NavContainer = styled.nav`
   }
 
   .burguer{
+    
     @media(min-width: 768px){
       display: none;
     }
   }
+  #BgDiv{
+    
+    @media(min-width: 768px){
+      display: none;
+    }
+  }
+ 
 `
 
 const BgDiv = styled.div`

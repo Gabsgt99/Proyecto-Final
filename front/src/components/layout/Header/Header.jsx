@@ -17,9 +17,9 @@ export function Header() {
 
     return (
       <div className={`links ${clicked ? 'active' : ''}`}>
-        <a onClick={handleClick} href="#"></a>
-        <a onClick={handleClick} href="#"></a>
-        <a onClick={handleClick} href="#"></a>
+        <Link onClick={handleClick} to="#"></Link>
+        <Link onClick={handleClick} to="#"></Link>
+        <Link onClick={handleClick} to="#"></Link>
       </div>
     );
   }
