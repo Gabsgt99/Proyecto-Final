@@ -74,6 +74,13 @@ h1{
   align-items: center;
   justify-content: center;
 }
+.container h1{
+  text-align: center;
+  margin-top: 3rem;
+  font-family: 'Poppins';
+  
+}
+
 
 .modal-content {
   background-color: #ffffff;
@@ -96,40 +103,46 @@ h1{
 .modal-body {
   margin-bottom: 20px;
 }
+.btn-register{
+margin-left: 90px;
+border-radius: 50px;
+margin-top: 50px;
 
-.close {
-  cursor: pointer;
 }
-
 .btn-register {
 
-  background-color: #020100;
+  background-color: #ff4700;
   color:#ffffff;
   border-color: #020100;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5)
+
 }
 
 .btn-register:hover {
   background-color: #ffffff;
-  color: #020100;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ 
 }
+@media (max-width: 768px) {
+  .col-md-6 {
+    width: 100%;
+  }
+}
+.btn-register {
+  width: 100px;
+}
+.form-group label {
+  text-align: left;
+}
+
+
+
+
+
 /* Edit-Profile*/
 .container {
   display: flex;
   flex-direction: column;
- 
+  align-items: center;
 }
-
-.link {
-  display:flex;
-  margin-top: 15px;
-  justify-content: end;
-  gap: 20px;
-  text-decoration: none;
-  color:rgb(141, 244, 39);
-}
-
 
 .container h1 {
   text-align: center;
@@ -138,44 +151,58 @@ h1{
   font-family: 'Poppins', sans-serif;
 }
 
-
 .form-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 40vh;
-  gap: 200px;
 }
 
 .input-container {
-  align-items: flex-end;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+
 }
 
-label {
+.input-container label {
   display: flex;
   margin-bottom: 5px;
 }
 
-input {
-  width: 500px;
+.input-container input {
+  width: 600px;
   border-radius: 5px;
   padding: 5px;
 }
-.buttons-container {
+
+.button-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  margin-top: -50px;
 }
 
-.save-button,
-.cancel-button {
-  margin-left: 100px;
-  padding: 5px;
-  border-radius: 10px;
-  margin-top:50px;
+.button-container button {
+  margin-right: 10px;
+  margin-left: 10px;
 }
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
 
-.save-button {
-  background-color: #ff4700;
-  color: #ffffff;
+  .input-container label {
+    width: auto;
+  }
+
+  .input-container input {
+    width: 100%;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    margin-top: -50px;
+  }
+
+  .button-container button {
+    margin-bottom: -30px;
+  }
 }
