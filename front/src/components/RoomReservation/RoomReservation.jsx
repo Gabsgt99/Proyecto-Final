@@ -7,22 +7,21 @@ import interactionPlugin from '@fullcalendar/interaction';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { INITIAL_EVENTS, createEventId } from './../../event-utils';
+import Alert from 'react-bootstrap/Alert';
+import { createEventId } from './../../event-utils';
 import './RoomReservation.css';
 
 export default class DemoApp extends React.Component {
   state = {
-    weekendsVisible: true,
-    currentEvents: [],
     isModalOpen: false,
     eventFormData: {
-      title: '',
       firstName: '',
       lastName: '',
       date: '',
       startTime: '',
       endTime: ''
-    }
+    },
+    error: ''
   };
 
   openModal = () => {
@@ -30,23 +29,22 @@ export default class DemoApp extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ isModalOpen: false });
-  };
-
-  handleWeekendsToggle = () => {
-    this.setState({
-      weekendsVisible: !this.state.weekendsVisible
-    });
+    this.setState({ isModalOpen: false, error: '' });
   };
 
   handleDateSelect = (selectInfo) => {
     const { startStr } = selectInfo;
     const { eventFormData } = this.state;
 
+    const defaultStartTime = '08:00';
+    const defaultEndTime = '18:00';
+
     this.setState({
       eventFormData: {
         ...eventFormData,
-        date: startStr
+        date: startStr,
+        startTime: defaultStartTime,
+        endTime: defaultEndTime
       },
       isModalOpen: true
     });
@@ -66,41 +64,52 @@ export default class DemoApp extends React.Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { eventFormData, currentEvents } = this.state;
-    const { title, firstName, lastName, date, startTime, endTime } = eventFormData;
+    const { eventFormData } = this.state;
+    const { firstName, lastName, date, startTime, endTime } = eventFormData;
 
-    const calendarApi = this.calendarRef.getApi();
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const currentMinute = currentTime.getMinutes();
 
-    calendarApi.addEvent({
-      id: createEventId(),
-      title: `${title} - ${firstName} ${lastName}`,
-      start: `${date}T${startTime}`,
-      end: `${date}T${endTime}`,
-      allDay: false
-    });
+    const selectedDate = new Date(date);
+    const selectedHour = parseInt(startTime.split(':')[0]);
+    const selectedMinute = parseInt(startTime.split(':')[1]);
 
-    this.setState({
-      currentEvents: [...currentEvents, { title: `${title} - ${firstName} ${lastName}`, start: date, end: date }],
-      isModalOpen: false,
-      eventFormData: {
-        title: '',
-        firstName: '',
-        lastName: '',
-        date: '',
-        startTime: '',
-        endTime: ''
-      }
-    });
+    if (
+      selectedDate.toDateString() === currentTime.toDateString() &&
+      (selectedHour < currentHour || (selectedHour === currentHour && selectedMinute < currentMinute))
+    ) {
+      this.setState({
+        error: 'La hora de inicio debe ser mayor o igual a la hora actual'
+      });
+    } else if (startTime >= endTime) {
+      this.setState({
+        error: 'La hora de fin debe ser mayor a la hora de inicio de la reserva'
+      });
+    } else {
+      const calendarApi = this.calendarRef.getApi();
+
+      calendarApi.addEvent({
+        id: createEventId(),
+        title: `${firstName} ${lastName}`,
+        start: `${date}T${startTime}`,
+        end: `${date}T${endTime}`,
+        allDay: false
+      });
+
+      this.setState({
+        isModalOpen: false,
+        eventFormData: {
+          firstName: '',
+          lastName: '',
+          date: '',
+          startTime: '',
+          endTime: ''
+        },
+        error: ''
+      });
+    }
   };
-
-  renderSidebarEvent(event) {
-    return (
-      <li key={event.id}>
-        <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b>
-        <i>{event.title}</i>
-      </li>
-    );
-  }
 
   renderEventContent(eventInfo) {
     return (
@@ -111,12 +120,45 @@ export default class DemoApp extends React.Component {
     );
   }
 
+  selectAllow = (selectInfo) => {
+    const { start } = selectInfo;
+    const currentDay = start.getDay();
+    const currentDate = new Date(start);
+
+    // Verificar si la fecha seleccionada no es un sábado (6) o domingo (0) y no es anterior a la fecha actual
+    const today = new Date();
+    return currentDay !== 6 && currentDay !== 0 && currentDate >= today;
+  };
+
+  generateTimeOptions = (startTime, endTime, interval) => {
+    const options = [];
+
+    const start = new Date(`2000-01-01T${startTime}`);
+    const end = new Date(`2000-01-01T${endTime}`);
+
+    let currentTime = new Date(start);
+
+    while (currentTime <= end) {
+      const formattedTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      options.push(<option key={formattedTime} value={formattedTime}>{formattedTime}</option>);
+
+      currentTime.setMinutes(currentTime.getMinutes() + interval);
+    }
+
+    return options;
+  };
+
   render() {
-    const { isModalOpen, eventFormData } = this.state;
+    const { isModalOpen, eventFormData, error } = this.state;
+
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    const startTime = `${Math.max(currentHour, 8).toString().padStart(2, '0')}:00`;
+    const endTime = '18:00';
 
     return (
       <div className='demo-app'>
-        {this.renderSidebar()}
         <div className='demo-app-main'>
           <FullCalendar
             ref={(ref) => (this.calendarRef = ref)}
@@ -131,12 +173,11 @@ export default class DemoApp extends React.Component {
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
-            weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS}
             select={this.handleDateSelect}
+            selectAllow={this.selectAllow} // Controlar la selección de fechas
             eventContent={this.renderEventContent}
-            eventClick={this.handleEventClick}
-            eventsSet={this.handleEvents}
+            now={currentTime.toISOString()} // Establecer la fecha y hora actual
+            scrollTime={currentTime.getHours() + ':00:00'} // Hacer scroll hasta la hora actual
           />
         </div>
         <Modal show={isModalOpen} onHide={this.closeModal}>
@@ -144,107 +185,74 @@ export default class DemoApp extends React.Component {
             <Modal.Title>New Event</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            {error && <Alert variant='danger'>{error}</Alert>}
             <Form onSubmit={this.handleFormSubmit}>
-              <Form.Group controlId="formTitle">
-                <Form.Label>Title</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="title"
-                  value={eventFormData.title}
-                  onChange={this.handleFormInputChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group controlId="formFirstName">
+              <Form.Group controlId='formFirstName'>
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
-                  type="text"
-                  name="firstName"
+                  type='text'
+                  name='firstName'
                   value={eventFormData.firstName}
                   onChange={this.handleFormInputChange}
                   required
                 />
               </Form.Group>
-              <Form.Group controlId="formLastName">
+              <Form.Group controlId='formLastName'>
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
-                  type="text"
-                  name="lastName"
+                  type='text'
+                  name='lastName'
                   value={eventFormData.lastName}
                   onChange={this.handleFormInputChange}
                   required
                 />
               </Form.Group>
-              <Form.Group controlId="formDate">
+              <Form.Group controlId='formDate'>
                 <Form.Label>Date</Form.Label>
                 <Form.Control
-                  type="date"
-                  name="date"
+                  type='date'
+                  name='date'
                   value={eventFormData.date}
                   onChange={this.handleFormInputChange}
+                  min={currentTime.toISOString().split('T')[0]} // Restringir fechas anteriores a la fecha actual
                   required
                 />
               </Form.Group>
-              <Form.Group controlId="formStartTime">
+              <Form.Group controlId='formStartTime'>
                 <Form.Label>Start Time</Form.Label>
                 <Form.Control
-                  type="time"
-                  name="startTime"
+                  as='select'
+                  name='startTime'
                   value={eventFormData.startTime}
                   onChange={this.handleFormInputChange}
                   required
-                />
+                >
+                  <option value=''>Select Start Time</option>
+                  {this.generateTimeOptions('08:00', '18:00', 30)}
+                </Form.Control>
               </Form.Group>
-              <Form.Group controlId="formEndTime">
+              <Form.Group controlId='formEndTime'>
                 <Form.Label>End Time</Form.Label>
                 <Form.Control
-                  type="time"
-                  name="endTime"
+                  as='select'
+                  name='endTime'
                   value={eventFormData.endTime}
                   onChange={this.handleFormInputChange}
                   required
-                />
+                >
+                  <option value=''>Select End Time</option>
+                  {this.generateTimeOptions('08:00', '18:00', 30)}
+                </Form.Control>
               </Form.Group>
-              <Button variant="primary" type="submit">
-                Add Event
+              <Button variant='primary' type='submit'>
+                Reservar
               </Button>
-              <Button variant="secondary" onClick={this.closeModal}>
-                Cancel
+              <Button variant='secondary' onClick={this.closeModal}>
+                Cancelar
               </Button>
             </Form>
           </Modal.Body>
         </Modal>
-      </div>
-    );
-  }
-
-  renderSidebar() {
-    return (
-      <div className='demo-app-sidebar'>
-        <div className='demo-app-sidebar-section'>
-          <h2>Instructions</h2>
-          <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
-          </ul>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <label>
-            <input
-              type='checkbox'
-              checked={this.state.weekendsVisible}
-              onChange={this.handleWeekendsToggle}
-            />
-            toggle weekends
-          </label>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <h2>All Events ({this.state.currentEvents.length})</h2>
-          <ul>
-            {this.state.currentEvents.map(this.renderSidebarEvent)}
-          </ul>
-        </div>
       </div>
     );
   }
