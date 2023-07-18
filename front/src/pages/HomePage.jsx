@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import room1 from '../Assets/ROOM1.png'
 import room2 from '../Assets/ROOM2.png'
 import room3 from '../Assets/ROOM3.png'
@@ -10,11 +11,15 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
+=======
+import Layout from '../components/layout/Layout';
+>>>>>>> sergio
 
 
 
 const HomePage = () => {
   return ( <>
+<<<<<<< HEAD
 
         <Layout>
         <div className="container-fluid">
@@ -131,6 +136,9 @@ const HomePage = () => {
   </div>
 
         </Layout>
+=======
+        <Layout/>
+>>>>>>> sergio
           </> );      
 };
 

@@ -25,9 +25,8 @@ function App() {
           <Route path='/salahedylamar' element={ <HedyLamarPage />} />
           <Route path='/cabina0' element={ <Cabina0Page />} />
           <Route path='/cabina1' element={ <Cabina1Page />} />
-          <Route path='/registrar' element={ <RegisterPage />} />
-          <Route path='/editarPerfil'element={<EditProfile/>}/>
-           <Route path="/layout" element={<Layout/>}/>
+          <Route path='/dashboardadmin' element={ <DashboardAdmin />} />
+          <Route path='/dashboard' element={ <DashboardUser />} />
         </Routes>
       
   );
