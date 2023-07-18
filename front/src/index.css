@@ -42,6 +42,16 @@
   width: 100%;
   background-color: #ff4700;
 }
+.btn {
+  background-color:  #020100;
+  color: #ffffff;
+  
+}
+
+.btn:hover {
+  background-color: #ffffff;
+   border-color: #ded5d1ac;
+}
 
 
 /* HOME PAGE */
@@ -61,7 +71,8 @@ h1{
 
 }
 
-/* REGISTER PAGE */
+
+/*REGISTER PAGE*/
 
 .modal {
   position: fixed;
@@ -206,3 +217,6 @@ margin-top: 50px;
     margin-bottom: -30px;
   }
 }
+
+
+

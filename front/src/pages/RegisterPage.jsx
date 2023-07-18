@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../../src/index.css";
 
 function RegisterPage() {
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
-  const [admi, setAdmi] = useState(false); // Cambiado a un valor booleano
+  const [admin, setAdmin] = useState(false);
   const [isActive, setActive] = useState(null);
   const navigate = useNavigate();
 
@@ -17,14 +18,14 @@ function RegisterPage() {
         name,
         lastname,
         email,
-        admi,
+        admin,
       });
       if (res && res.data.success) {
         /* alert.success(res.data && res.data.message); */ //<===aqui va un mensaje popup de exito en el registro ======
         navigate("/"); //Aqui poner a donde va despues del registro==========
       } else {
         //<===aqui va un mensaje popup
-        console.log(name, lastname, email, admi);
+        console.log(name, lastname, email, admin);
       }
     } catch (error) {
       console.log(error);
@@ -79,13 +80,13 @@ function RegisterPage() {
             </div>
             <div>
               <label style={{ marginRight: "5px"}}>
-                Admi:
+             Admin:
               </label>
               <input
                 type="checkbox"
-                name="admi"
-                checked={admi}
-                onChange={(e) => setAdmi(e.target.checked)}
+                name="admin"
+                checked={admin}
+                onChange={(e) => setAdmin(e.target.checked)}
               />
             </div>
             <div className="button-container">
