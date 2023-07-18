@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import loginImg from "../Assets/LoginImg.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
-
+import Layout from '../components/Layout/Layout.jsx';
 
 function LoginPage() {
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
@@ -19,7 +19,7 @@ function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Username or Email:', usernameOrEmail);
+    console.log('Username or Email:', usernameOrEmail); 
     console.log('Password:', password);
     setIsClicked(true);
 
@@ -30,7 +30,8 @@ function LoginPage() {
   };
 
   return (
-    <>
+    <Layout>
+
       <div className="container-fluid">
         <div className="row">
           <div className="col ">
@@ -85,7 +86,7 @@ function LoginPage() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 
