@@ -7,10 +7,6 @@ const EditProfile = () => {
   const [email, setEmail] = useState("");
   const [isActive, setActive] = useState(null);
 
-  const handleSaveChanges = () => {
-    console.log("Guardando cambios:", { name, lastName, email });
-  };
-
   return (
     <div className="container">
       <h1 className="editar">Editar perfil</h1>

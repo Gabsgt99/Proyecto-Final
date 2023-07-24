@@ -10,14 +10,11 @@ import Cabina0Page from "./pages/Cabina0Page";
 import Cabina1Page from "./pages/Cabina1Page";
 import RegisterPage from "./pages/RegisterPage";
 import EditProfile from "./pages/EditProfile";
-import Layout from "./components/layout/Layout";
-import DashboardAdmin from "./pages/DashboardAdmin";
-import DashboardUser from "./pages/DashboardUser";
  
 function App() {
 
   return (
-    <Router>
+   
         <Routes>
           <Route path="/"exact element={<HomePage />}/>
           <Route path="/login" element={<Login />}/> 
@@ -29,11 +26,8 @@ function App() {
           <Route path='/cabina1' element={ <Cabina1Page />} />
           <Route path='/registrar' element={ <RegisterPage />} />
           <Route path='/editarPerfil'element={<EditProfile/>}/>
-          <Route path="/layout" element={<Layout/>}/>
-          <Route path='/dashboardadmin' element={ <DashboardAdmin />} />
-          <Route path='/dashboard' element={ <DashboardUser />} />
         </Routes>
-    </Router>
+    
       
   );
 };
