@@ -1,12 +1,10 @@
 import React from "react";
-import Layout from "../Layout";
 import logof5 from "../../../Assets/logof5.png";
 import "./Footer.css";
 import { Link } from "react-router-dom";
- const Footer = () => {
-
+const Footer = () => {
   return (
-    <Layout>
+    <>
       <footer>
         <div className="logo">
           <img src={logof5} alt="Logo" />
@@ -51,7 +49,7 @@ import { Link } from "react-router-dom";
           </ul>
         </div>
       </footer>
-    </Layout>
+    </>
   );
 };
- export default Footer;
+export default Footer;

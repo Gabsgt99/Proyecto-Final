@@ -40,7 +40,7 @@
 .orange-space{
   height: 9rem;
   width: 100%;
-  background-color: #ff4700;
+   background-color: #ff4700; 
 }
 .btn {
   background-color:  #020100;
@@ -73,7 +73,9 @@ h1{
 
 
 /*REGISTER PAGE*/
-
+.container-fluid{
+  margin-bottom: 1rem;
+}
 .modal {
   position: fixed;
   top: 0;

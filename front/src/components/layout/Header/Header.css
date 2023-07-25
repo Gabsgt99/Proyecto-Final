@@ -1,13 +1,125 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+.header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: left;
+  padding: 0px;
+}
+
+.social-icons {
+  justify-content:left;
+  margin-top:-70px;
+}
+
+.Logo {
+  height: 60px;
+  width: 120px;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+.header-logo {
+  margin-right: 15px;
+  margin-top: 80px;
+}
+
+.header-toggler {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-left: 6em;
+} 
+
+.social-icon {
+  color: black;
+  margin-right: 30px;
+  width: 22px;
+  height: 22px;
+  margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+.header-container {
+    flex-direction:row;
+    align-items: center;
+
   }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
+
+.social-icons {
+    justify-content: center;
+    margin-top: -10px;
+    margin-right: 15px;
   }
+
+.Logo {
+    margin-top: 10px;
+  }
+
+.header-toggler {
+    margin-top: 10px;
+    align-items: left;
+
+  } 
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: left;
+  padding: 0px;
+}
+
+.social-icons {
+  justify-content:left;
+  margin-top:-70px;
+}
+
+.Logo {
+  height: 60px;
+  width: 120px;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+.header-logo {
+  margin-right: 15px;
+  margin-top: 80px;
+}
+
+.header-toggler {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-left: 6em;
+} 
+
+.social-icon {
+  color: black;
+  margin-right: 30px;
+  width: 22px;
+  height: 22px;
+  margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+.header-container {
+    flex-direction:row;
+    align-items: center;
+
+  }
+
+.social-icons {
+    justify-content: center;
+    margin-top: -10px;
+    margin-right: 15px;
+  }
+
+.Logo {
+    margin-top: 10px;
+  }
+
+.header-toggler {
+    margin-top: 10px;
+    align-items: left;
+
+  } 
+}

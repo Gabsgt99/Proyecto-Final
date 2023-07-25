@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../src/index.css";
+import { Layout } from "../components/Layout/Layout";
 
 function RegisterPage() {
   const [name, setName] = useState("");
@@ -34,85 +35,85 @@ function RegisterPage() {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row justify-content-center">
-        <div className="col-md-6 mt-5 px-5 ">
-          <h1 className="editar">Registrar nuevo usuario</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group py-3">
-              <label htmlFor="firstName">Nombres:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="firstName"
-                name="firstName"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                autoFocus
-              />
-            </div>
-            <div className="form-group py-3">
-              <label htmlFor="lastName">Apellidos:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="lastName"
-                name="lastName"
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
-                required
-                autoFocus
-              />
-            </div>
-            <div className="form-group py-3">
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoFocus
-              />
-            </div>
-            <div>
-              <label style={{ marginRight: "5px"}}>
-             Admin:
-              </label>
-              <input
-                type="checkbox"
-                name="admin"
-                checked={admin}
-                onChange={(e) => setAdmin(e.target.checked)}
-              />
-            </div>
-            <div className="button-container">
-              <button
-                type="submit"
-                className={`btn btn-register ${
-                  isActive === "cancel" ? "active" : ""
-                }`}
-                onClick={() => setActive("cancel")}
-              >
-                Cancelar
-              </button>
-              <button
-                type="submit"
-                className={`btn btn-register ${
-                  isActive === "save" ? "active" : ""
-                }`}
-                onClick={() => setActive("save")}
-              >
-                Guardar
-              </button>
-            </div>
-          </form>
+    <Layout>
+      <div className="container-fluid">
+        <div className="row justify-content-center">
+          <div className="col-md-6 mt-5 px-5 ">
+            <h1 className="editar">Registrar nuevo usuario</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group py-3">
+                <label htmlFor="firstName">Nombres:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="firstName"
+                  name="firstName"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  autoFocus
+                />
+              </div>
+              <div className="form-group py-3">
+                <label htmlFor="lastName">Apellidos:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="lastName"
+                  name="lastName"
+                  value={lastname}
+                  onChange={(e) => setLastname(e.target.value)}
+                  required
+                  autoFocus
+                />
+              </div>
+              <div className="form-group py-3">
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoFocus
+                />
+              </div>
+              <div>
+                <label style={{ marginRight: "5px" }}>Admin:</label>
+                <input
+                  type="checkbox"
+                  name="admin"
+                  checked={admin}
+                  onChange={(e) => setAdmin(e.target.checked)}
+                />
+              </div>
+              <div className="button-container">
+                <button
+                  type="submit"
+                  className={`btn btn-register ${
+                    isActive === "cancel" ? "active" : ""
+                  }`}
+                  onClick={() => setActive("cancel")}
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className={`btn btn-register ${
+                    isActive === "save" ? "active" : ""
+                  }`}
+                  onClick={() => setActive("save")}
+                >
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }
 
