@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "./Header/Header.jsx";
 import Footer from "./Footer/Footer.jsx";
-import Navbar from "../Layout/Navbar/Navbar.jsx";
+import Navbar from "./Navbar/Navbar.jsx";
 
 export const Layout = ({ children, title, description, keywords, author }) => {
   return (
