@@ -7,7 +7,7 @@ export const Layout = ({ children, title, description, keywords, author }) => {
   return (
     <div>
       <Header />
-      <Navbar/>
+      <Navbar />
       <main style={{ minHeight: "70vh" }}>{children}</main>
       <Footer />
     </div>
