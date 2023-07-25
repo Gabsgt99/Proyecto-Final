@@ -53,39 +53,6 @@ export const createBookingController = async (req,res) => {
 
 
 
-
-/* export const createBookingController = async (req, res) => {
-  try {
-    const { name } = req.body;
-    if (!name) {
-      return res.status(401).send({ message: "Escriba un nombre" });
-    }
-    const existingRoom = await roomModel.findOne({ name });
-    if (existingRoom) {
-      return res.status(200).send({
-        success: false,
-        message: "Ya existe una sala con ese nombre",
-      });
-    }
-    const room = await new roomModel({
-      name,
-      slug: slugify(name),
-    }).save();
-    res.status(201).send({
-      success: true,
-      message: "Ha creado una nueva sala",
-      room,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      error,
-      message: "Error al crear una sala",
-    });
-  }
-}; */
-
 //update Bookings
 export const updateBookingController = async (req, res) => {
   try {

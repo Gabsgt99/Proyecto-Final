@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Layout from "../components/layout/Layout.jsx";
+import Layout from "../components/Layout/Layout.jsx";
 import { FaChevronRight } from "react-icons/fa6";
 
 const Rooms = () => {
