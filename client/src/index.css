@@ -1,0 +1,149 @@
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar css */
+.navbar {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  line-height: 26px;
+  text-transform: uppercase;
+}
+
+.active{
+  border-bottom: 2px solid #ff4700;
+}
+
+.popoverstyle {
+  z-index: 9999 !important;
+}
+
+/*FOOTER*/
+.footer {
+  color: white;
+  padding: 25px;
+  background: #ff4700; /* fallback for old browsers */
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+
+.footer a:hover {
+  color: #020100;
+  border-bottom: 1px solid #020100;
+}
+ /*All rooms Cards layout*/
+.grid {
+  display: grid;
+  justify-content: center;
+  margin-top: 3rem;
+}
+.allroom-card {
+  margin-bottom: 0.25rem!important;
+}
+.allrooms-cbody {
+  padding: 2rem!important;
+  margin-top: 3rem;
+}
+
+.allrooms-ctitle {
+  text-transform: uppercase;
+  color: #ff4700!important;
+}
+
+.odd-card {
+  flex-direction: row-reverse !important;
+}
+
+.goroom {
+  font-family: 'Rubik', sans-serif;
+  text-decoration: none;
+  color: #020100;
+
+}
+
+.goroom:hover {
+  color: #ff4700;
+  border-bottom: 1px solid #ff4700;
+}
+
+.allroom-card:before {
+  height: 20px;
+  content: "";
+  background-color: #ff4700;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: auto;
+}
+
+/*OneRoom layout*/
+
+.cont-xl {
+  margin-top: 1.5rem;
+}
+
+.oroom-title {
+  font-family: 'Poppins', sans-serif;
+  color: #ff4700!important;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.rcard-text{
+  font-weight: 400;
+  text-align: center;
+}
+
+.card-calendar {
+  padding: 0 0 0.5rem 0.5rem;
+}
+
+/* Full Calendar */
+.fc-header-toolbar .fc-toolbar{
+  margin-top: 0.5rem!important;
+} 
+
+.fc-new-button {
+  display: none!important;
+}
+
+/* font-family: 'Fira Code', monospace;
+font-family: 'Poppins', sans-serif;
+font-family: 'Rubik', sans-serif; */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .card-image{
+  height: 250px;
+  width: 250px;
+} */
+
+/* .card-image > div{
+  opacity: 1;
+  background: black;
+} */
+
+/* .card-image img{
+  max-width: 250px;
+  max-height: 250px;
+  width: auto;
+  height: auto;
+}*/
