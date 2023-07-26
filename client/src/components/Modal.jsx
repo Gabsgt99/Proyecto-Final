@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 
 const Modal = () => {
   return (
@@ -24,4 +24,4 @@ const Modal = () => {
   )
 }
 
-export default Modal;
+export default Modal; */
