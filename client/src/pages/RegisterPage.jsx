@@ -81,13 +81,21 @@ function RegisterPage() {
                 />
               </div>
               <div>
-                <label style={{ marginRight: "5px" }}>Admin:</label>
+              <input type="checkbox" className="btn-check" id="btncheck1" autocomplete="off"/>
+              <label className="btn btn-outline-primary" for="btncheck1">Soy Admin?</label>
+              <div className="form-check form-switch">
+                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="admin"
+                  checked={admin}
+                  onChange={(e) => setAdmin(e.target.checked)}/>
+                <label className="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+              </div>
+                {/* <label style={{ marginRight: "5px" }}>Admin:</label>
                 <input
                   type="checkbox"
                   name="admin"
                   checked={admin}
                   onChange={(e) => setAdmin(e.target.checked)}
-                />
+                /> */}
               </div>
               <div className="button-container">
                 <button

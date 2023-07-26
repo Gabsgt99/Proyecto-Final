@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../Layot/Header/Header';
-import Footer from './Footer.jsx
-import Navbar from '../Layot/Navbar.jsxvbar.jsx';
+import Header from '../Layout/Header/Header.jsx';
+import Footer from '../Layout/Footer.jsx';
+import Navbar from '../Layout/Navbar.jsx';
 
 const Layout = ({children}) => {
   return (

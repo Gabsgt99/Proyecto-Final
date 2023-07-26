@@ -10,18 +10,16 @@ const ForgotPassword = () => {
 
     const history = useNavigate();
 
-    const [data2, setData] = useState(false);
-
     const [password, setPassword] = useState("");
 
     const [message, setMessage] = useState("");
 
     const userValid = async () => {
-        const res = await fetch(`/forgotpassword/${id}/${token}`, {
-            method: "GET",
+        const res = await axios.get(`/forgotpassword/${id}/${token}`, {
+           /*  method: "GET",
             headers: {
                 "Content-Type": "application/json"
-            }
+            } */
         });
 
         const data = await res.json()
@@ -80,34 +78,23 @@ const ForgotPassword = () => {
 
     return (
         <>
-            {
-                data2 ? (
-                    <>
-                        <section>
-                            <div className="form_data">
-                                <div className="form_heading">
-                                    <h1>Enter Your NEW Password</h1>
-                                </div>
-
-                                <form>
-                                    {message ? <p style={{ color: "green", fontWeight: "bold" }}>Password Succesfulyy Update </p> : ""}
-                                    <div className="form_input">
-                                        <label htmlFor="password">New password</label>
-                                        <input type="password" value={password} onChange={setval} name="password" id="password" placeholder='Enter Your new password' />
-                                    </div>
-
-                                    <button className='btn' onClick={sendpassword}>Send</button>
-                                </form>
-                                <p><NavLink to="/">Home</NavLink></p>
-                                <ToastContainer />
-                            </div>
-                        </section>
-                    </>
-                ) : <Box sx={{ display: 'flex', justifyContent: "center", alignItems: "center", height: "100vh" }}>
-                    Loading... &nbsp;
-                    <CircularProgress />
-                </Box>
-            }
+            <section>
+                <div className="form_data">
+                    <div className="form_heading">
+                        <h1>Escribe tu nueva contraseña</h1>
+                    </div>
+                    <form>
+                        {message ? <p style={{ color: "green", fontWeight: "bold" }}>Password Succesfulyy Update </p> : ""}
+                        <div className="form_input">
+                            <label htmlFor="password">New password</label>
+                            <input type="password" value={password} onChange={setval} name="password" id="password" placeholder='Enter Your new password' />
+                        </div>
+                        <button className='btn' onClick={sendpassword}>Send</button>
+                    </form>
+                    <p><NavLink to="/">Home</NavLink></p>
+                    <ToastContainer />
+                </div>
+            </section>
         </>
     )
 }

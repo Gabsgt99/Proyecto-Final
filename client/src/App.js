@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Login from './pages/Login.jsx';
+import Login from './pages/Auth/Login.jsx';
 import FullCalendarApp from './pages/FullCalendar';
 import Rooms from './pages/Rooms.jsx';
 import EachRoom from './pages/EachRoom.jsx';
