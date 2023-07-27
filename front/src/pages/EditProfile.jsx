@@ -17,6 +17,7 @@ const EditProfile = () => {
             <div className="input-container">
               <label>Nombres:</label>
               <input
+                className="form-control"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -26,6 +27,7 @@ const EditProfile = () => {
             <div className="input-container">
               <label>Apellidos:</label>
               <input
+                className="form-control"
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -35,16 +37,18 @@ const EditProfile = () => {
             <div className="input-container">
               <label>Correo electrónico:</label>
               <input
+                className="form-control"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-              />
+              /> email
             </div>
           </form>
         </div>
         <div className="button-container">
           <button
             type="submit"
+            name="cancelar"
             className={`btn btn-register ${
               isActive === "cancel" ? "active" : ""
             }`}

@@ -38,7 +38,7 @@
 }
 
 .orange-space{
-  height: 9rem;
+  height: 2rem;
   width: 100%;
    background-color: #ff4700; 
 }
@@ -73,6 +73,10 @@ h1{
 
 
 /*REGISTER PAGE*/
+.form-control:focus {
+  border-color: #ff4700!important;
+  box-shadow: initial!important;
+}
 .container-fluid{
   margin-bottom: 1rem;
 }

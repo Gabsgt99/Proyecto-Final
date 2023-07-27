@@ -3,6 +3,7 @@ import room1 from "../Assets/ROOM1.png";
 import room2 from "../Assets/ROOM2.png";
 import room3 from "../Assets/ROOM3.png";
 import room4 from "../Assets/ROOM4.png";
+import room7 from "../Assets/ROOM7.png";
 import room5 from "../Assets/Cabina0.png";
 import room6 from "../Assets/Cabina1.png";
 import { Layout } from "../components/Layout/Layout";
@@ -172,6 +173,31 @@ const HomePage = () => {
                 className="room cabina"
                 alt="sala de reuniones"
               />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <div className="orange-space"></div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-6 col-lg-7 bg-white p-5 order-sm-1 order-last">
+              <h1 className="fw-bold">Sala multiusos</h1>
+              <p className="p-1">Aforo máximo recomendado: 10 personas.</p>
+              <p className="p-1">
+                Esta sala está pensada para ser utilizada de diversas formas,
+                brindando infinitas posibilidades para cualquier tipo de
+                actividad. Desde reuniones de equipo, talleres creativos,
+                presentaciones, hasta sesiones de estudio o simplemente un lugar
+                para relajarse y socializar, la sala multiusos es el escenario
+                perfecto para cualquier ocasión.
+              </p>
+              <Link to="/">
+                RESERVA ESTA SALA <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+            </div>
+            <div className="col-sm-6 col-lg-5 bg-success order-sm-2 order-first">
+              <img src={room7} className="room" alt="sala multiusos" />
             </div>
           </div>
         </div>
