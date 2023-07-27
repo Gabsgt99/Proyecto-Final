@@ -1,13 +1,13 @@
 import { comparePassword, hashPassword } from "../helpers/authHelper.js";
 import userModel from "../models/userModel.js";
 import JWT from 'jsonwebtoken';
-import { v4 as uuidv4 } from 'uuid';
-import { getToken, getTokenData } from "../config/jwt.config.js";
-import { sendEmail, getTemplate } from "../config/mail.config.js";
+//import { v4 as uuidv4 } from 'uuid';
+//import { getToken, getTokenData } from "../config/jwt.config.js";
+//import { sendEmail, getTemplate } from "../config/mail.config.js";
 
 export const registerController = async(req,res) => {
     try {
-        const {name,email} = req.body;
+        const {name,email,admin} = req.body;
         //Validation
         if(!name){
             return res.send({error:'Escriba un nombre'});
@@ -26,19 +26,19 @@ export const registerController = async(req,res) => {
                 message:'Usuario ya registrado'
             });
         }
-        const password = uuidv4();
+        /* const password = uuidv4();
         //Generate a code for email confirmation
-        const code = uuidv4();
+        //const code = uuidv4();
         //Generate token for mail confirmation
-        console.log(email,code);
-        const token = getToken({email,code});
+        console.log(email,password);
+        const token = getToken({email,password});
         //Get a template
         const template = getTemplate(name,token);
         //Send email
-        await sendEmail(email,template);
+        await sendEmail(email,template); */
         
         //save
-        const user = await new userModel({name,lastname,email,password,code}).save();
+        const user = await new userModel({name,email,admin,password,token}).save();
         res.status(201).send({
             success:true,
             message:'Usuario registrado con exito',
@@ -55,7 +55,7 @@ export const registerController = async(req,res) => {
 };
 
 //Validate user
-const confirm = async (req, res) => {
+/* const confirm = async (req, res) => {
     try {
 
        // Get token
@@ -106,10 +106,10 @@ const confirm = async (req, res) => {
             msg: 'Error al confirmar usuario'
         });
     }
-};
+}; */
 
 //Validated user create a password
-export const passController = async (req,res) => {
+/* export const passController = async (req,res) => {
     try {
         const password = req.body;
         if(!password){
@@ -131,7 +131,7 @@ export const passController = async (req,res) => {
             error,
         });
     }
-};
+}; */
 
 
 // *POST* LOGIN
@@ -164,14 +164,14 @@ export const loginController = async(req,res) => {
         const token = await JWT.sign({ _id:user._id}, process.env.JWT_SECRET, {
             expiresIn:"30d",
         });
-        res.status(200).send({
+        res.status(201).send({
             success:true,
             message:'Te has logueado',
             user:{
                 _id:user._id,
                 name:user.name,
-                lastname:user.lastname,
                 email:user.email,
+                isadmin:user.admin
             },
             token,
         });
@@ -195,3 +195,5 @@ export const testController = (req, res) => {
     }
     
 };
+
+export const sendPasswordLink = () => {};

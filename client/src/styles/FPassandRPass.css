@@ -1,14 +1,14 @@
 section{
     width: 100%;
     padding: 10px;
-    min-height:calc(100vh - 80px);
+    /*min-height:calc(100vh - 80px);*/
 }
 
 section .form_data{
+    font-family: 'Poppins', sans-serif!important;
     max-width: 550px;
     margin: 25px auto;
     padding: 35px 10px;
-    box-shadow: 0 0 15px -10px #2d3748;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -21,9 +21,9 @@ section .form_data{
     align-items: center;
 }
 
-.form_data h1{
+.form_data h3{
     font-size: 34px;
-    color: #2a4365;
+    color: #ff4700;
 }
 
 .form_data p{
@@ -36,18 +36,23 @@ section .form_data{
     margin-top: 45px;
     width: 100%;
     padding: 10px 50px;
+    display: contents;
 }
 
 .form_data form .form_input input{
     width: 100%;
     padding: 11px;
-    border: 1px solid #d4d0d0;
+    border: 1px solid #9c9c9c;
     border-radius: 5px;
     outline: none;
     margin-bottom: 14px;
-    margin-top: 9px;
+    margin-top: 10px;
     font-size: 14px;
     
+}
+
+.form_input{
+    margin-top: 4rem;
 }
 
 .form_data form .form_input label{
@@ -62,7 +67,8 @@ section .form_data{
 }
 
 .form_data form .form_input input:focus{
-    border:2px solid rgba(66, 153, 225,0.6);
+    border-color: #ff4700!important;
+    box-shadow: initial!important;
 }
 
 
@@ -81,32 +87,30 @@ section .form_data{
     margin-top: 12px;
     font-size: 14px;
     font-weight: 600;
-    color: #2a4365;
+    color: #9c9c9c;
     background-color: #EDF2F7;
     border-radius: 5px;
     cursor: pointer;
 }
 
-form .btn{
-    display:block;
-    width: 100%;
-    padding: 15px;
+form .btn-form{
+    display:flex;
+    justify-content: center;
+    width: 40%;
+    padding: 5px;
     border: none;
     outline: none;
     border-radius: 5px;
-    background-color:#1a365d;
+    background-color:#020100;
     color: #fff;
     font-weight: 600;
     font-size: 18px;
-    margin-top: 10px;
+    margin-top: 3rem;
     cursor: pointer;
     transition: all .3s;
+    box-shadow: inset 0 1px 0 #fff, 0 4px 0 #070000, 1px 6px 6px 3px rgba(0,0,0,.3);
 }
 
-
-form .btn:hover{
-    background-color: #97a1b1;
-}
 
 .form_data form p{
     text-align: center;

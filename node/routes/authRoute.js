@@ -1,5 +1,5 @@
 import express from "express";
-import {registerController, loginController, testController, passController } from "../controllers/authController.js";
+import {registerController, loginController, testController, sendPasswordLink } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddlewares.js";
 import { createBookingController } from "../controllers/bookingController.js";
 
@@ -11,8 +11,7 @@ const router = express.Router()
 router.post('/register', registerController);
 
 //CONFIRM-CREATE PASSWORD || METHOD POST
-
-router.post('/confirm', passController);
+//router.post('/confirm', passController);
 
 //LOGIN || POST
 router.post('/login', loginController);
@@ -22,5 +21,8 @@ router.post('/booking', createBookingController);
 
 //Test Routes
 router.get('/test', requireSignIn, isAdmin, testController);
+
+// SEND RESET PASSWORD LINK || POST
+router.post("sendpasswordlink", sendPasswordLink);
 
 export default router;

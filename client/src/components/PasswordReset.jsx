@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import '../styles/FPassandRPass.css';
+import Layout from './Layout/Layout.jsx';
+
 
 const PasswordReset = () => {
 
@@ -15,11 +18,11 @@ const PasswordReset = () => {
         e.preventDefault();
 
         if (email === "") {
-            toast.error("email is required!", {
+            toast.error("Escribe un correo!", {
                 position: "top-center"
             });
         } else if (!email.includes("@")) {
-            toast.warning("includes @ in your email!", {
+            toast.warning("El correo debe incluir una @!", {
                 position: "top-center"
             });
         } else {
@@ -33,7 +36,7 @@ const PasswordReset = () => {
 
             const data = await res.json();
 
-            if (data.status == 201) {
+            if (data.status === 201) {
                 setEmail("");
                 setMessage(true)
             } else {
@@ -45,26 +48,28 @@ const PasswordReset = () => {
     }
 
     return (
-        <>
+        <Layout>
             <section>
                 <div className="form_data">
                     <div className="form_heading">
-                        <h1>Enter Your Email</h1>
+                        <h3>RESETEA TU CONTRASEÑA</h3>
                     </div>
-
-                    {message ? <p style={{ color: "green", fontWeight: "bold" }}>pasword reset link send Succsfully in Your Email</p> : ""}
+                    <ToastContainer 
+                        position="top-center"
+                    />
+                    {message ? <p style={{ color: "green", fontWeight: "bold" }}>Te hemos enviado un correo electrónico con un link</p> : ""}
                     <form>
                         <div className="form_input">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" value={email} onChange={setVal} name="email" id="email" placeholder='Enter Your Email Address' />
+                            <label htmlFor="email">Escribe tu correo electrónico</label>
+                            <input type="email" value={email} onChange={setVal} name="email" id="email" placeholder='Email' />
                         </div>
 
-                        <button className='btn' onClick={sendLink}>Send</button>
+                        <button className='btn-form' onClick={sendLink}>Enviar</button>
                     </form>
-                    <ToastContainer />
+
                 </div>
             </section>
-        </>
+        </Layout>
     )
 }
 

@@ -5,6 +5,8 @@ import FullCalendarApp from './pages/FullCalendar';
 import Rooms from './pages/Rooms.jsx';
 import EachRoom from './pages/EachRoom.jsx';
 import RegisterPage from './pages/RegisterPage';
+import PasswordReset from './components/PasswordReset.jsx';
+
 function App() {
   return (
     <>
@@ -14,6 +16,7 @@ function App() {
         <Route path='/rooms' element={<Rooms/>}/>
         <Route path='/rooms/:id' element={<EachRoom/>}/>
         <Route path='/register' element={<RegisterPage/>}/>
+        <Route path="/password-reset" element={<PasswordReset />} />
       </Routes>
     </>
   );

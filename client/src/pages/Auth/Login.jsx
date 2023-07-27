@@ -6,7 +6,7 @@ import Layout from "../../components/Layout/Layout.jsx";
 import axios from "axios";
 import { useAuth } from "../../context/Auth.jsx";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-
+const loginImg = "/assets/LoginImg.png";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -56,11 +56,19 @@ const Login = () => {
 
     return (
         <Layout>
-        <div className="form-container">
-            <div className="row text-center">
-            <div className="col col-login py-5 fs-1 fw-bold text-white">
-                Login
+        <div className="container">
+            <div className="row">
+            <img
+                src={loginImg}
+                className="img-fluid"
+                width="100%"
+                alt="Login"
+            />
             </div>
+            <div className="row text-center logincol">
+            <h1 className="col py-5 fs-1 fw-bold text-white">
+                Login
+            </h1>
             </div>
 
             <div className="row">

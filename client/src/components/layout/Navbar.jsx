@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import BurguerButton from '../BurguerButton.jsx';
+import { useAuth} from "../../context/Auth.jsx";
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
- 
+  const [auth, setAuth] = useAuth();
+  const handleLogout = () => {
+    setAuth({
+        ...auth, 
+        user:null,
+        token:"",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Te has deslogueado");
+  };
   const [clicked, setClicked] = useState(false)
   const handleClick = () => {
     //cuando esta true lo pasa a false y vice versa
@@ -15,10 +26,22 @@ const Navbar = () => {
         <span></span>
         <div className={`links ${clicked ? '' : ''}`}>
           <a onClick={handleClick} href="/">HOME</a>
-          <a onClick={handleClick} href="/">USUARIO</a>
-          <a onClick={handleClick} href="https://factoriaf5.org/">CERRAR</a>
-          
-        </div>
+          {auth.user.isadmin ? (
+          <>
+          <li className="nav-item dropdown">
+          {/* eslint-disable-next-line */}
+          <a className='nav-link dropdown-toggle' role='button' data-bs-toggle="dropdown" aria-expanded="false" href="#">{auth?.user?.name}</a>
+          <ul className="dropdown-menu">
+          <li><a className="dropdown-item" onClick={handleLogout} href="/login">Logout</a>
+          </li>
+        
+        </ul>
+        </li>
+        </>
+          ) : (<>
+
+          </>) }
+          </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>
