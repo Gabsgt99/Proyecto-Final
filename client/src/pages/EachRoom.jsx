@@ -7,12 +7,9 @@ import ModalComponent from "../components/ModalComponent.jsx";
 
 const EachRoom = () => {
   const { id } = useParams();
-  console.log(id, 'aquikatao');
   const [room, setRoom] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
 
   useEffect(() => {
     if (id) {
@@ -23,44 +20,20 @@ const EachRoom = () => {
 
   const getRoom = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:8080/api/v1/rooms/${id}`, {
-        method: "GET",
-        cors: {
-          origin: "http://localhost:8080"
-        },
-      })
-
+      const { data } = await axios.get(`http://localhost:8080/api/v1/rooms/${id}`);
       setRoom(data.rooms);
-      console.log(data.json);
     } catch (error) {
       console.log(error);
     }
-  };
-  console.log(room)
-
-  const handleModalOpen = (date) => {
-    setIsModalOpen(true);
-    setSelectedDate(date);
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
-  // Esta función manejará la selección de fecha desde el calendario
-  const handleDateClick = (date) => {
-    setSelectedDate(date); // Establece la fecha seleccionada
-    setIsModalOpen(true); // Abre automáticamente el modal
-  };
-
-  // Funciones para manejar el cambio de horas en el timepicker
-  const handleStartTimeChange = (event) => {
-    setStartTime(event.target.value);
-  };
-
-  const handleEndTimeChange = (event) => {
-    setEndTime(event.target.value);
+  const handleDateClick = (info) => {
+    setSelectedDate(info.event.start);
+    setIsModalOpen(true); // Set isModalOpen to true when a valid date is clicked
   };
 
   return (
@@ -68,7 +41,7 @@ const EachRoom = () => {
       <div className="container-xl cont-xl">
         <div className="card-group">
           <div className="card">
-            <img
+          <img
               src={`http://localhost:8080/api/v1/rooms/room-photo/${id}`}
               className="card-img-top"
               alt={room.name}
@@ -83,8 +56,7 @@ const EachRoom = () => {
             </div>
           </div>
           <div className="card card-calendar">
-            {/* Pasa la función handleDateClick al componente CalendarComponent */}
-            <CalendarComponent roomId={id} handleDateClick={handleDateClick} />
+            <CalendarComponent roomId={id} isModalOpen={isModalOpen} handleDateClick={handleDateClick} />
           </div>
         </div>
       </div>
@@ -93,10 +65,6 @@ const EachRoom = () => {
           selectedDate={selectedDate}
           isModalOpen={isModalOpen}
           closeModal={handleModalClose}
-          startTime={startTime}
-          endTime={endTime}
-          handleStartTimeChange={handleStartTimeChange} // Pasa la función de cambio de hora de inicio
-          handleEndTimeChange={handleEndTimeChange} // Pasa la función de cambio de hora de fin
         />
       )}
     </Layout>
