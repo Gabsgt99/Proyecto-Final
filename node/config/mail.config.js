@@ -11,9 +11,8 @@ const transporter = nodemailer.createTransport({
     secure: false,
     service:'gmail',
     auth: {
-      // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-      user: 'test.devlop01@gmail.com',//mail.user,
-      pass: 'mupwzsvmqqhvpujm'//mail.pass,
+      user: process.env.FROM_EMAIL,//mail.user,
+      pass: process.env.PASS_FE//mail.pass,
     },
   });
   
@@ -32,23 +31,48 @@ const transporter = nodemailer.createTransport({
     }
 };
 export const getTemplate = (name, token) => {
-    return`
-        <head>
-        </head>
+    return `
+        <!DOCTYPE html>
+            <html>
+                <head>
+                    <style>
+                    /* Agrega estilos en línea aquí para mejorar la presentación del correo */
+                    body {
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        background-color: #f1f1f1;
+                        color: #333;
+                        padding: 20px;
+                    }
+                    #email___content {
+                        background-color: #fff;
+                        padding: 20px;
+                        border-radius: 5px;
+                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                    }
+                    img {
+                        max-width: 100%;
+                        height: auto;
+                    }
+                    a {
+                        color: #007bff;
+                        text-decoration: none;
+                    }
+                    </style>
+                </head>
 
-        <div id="email___content">
-            <img src="https://factoriaf5.org/wp-content/uploads/2021/07/logo.png" alt="">
-            <h2>Hola ${ name }!</h2>
-            <p>Enhorabuena,
-            has sido registrado exitosamente en la
-            aplicación de gestión de salas de
-            Factoria F5, para poder ingresar a la
-            aplicación debes confirmar tu registro y
-            crear tu contraseña.</p>
-            <a
-                href="http://localhost:8080/api/v1/auth/confirm/${token}"
-                target="_blank"
-            >Confirmar Cuenta</a>
-        </div>
-    `;
+                <body>
+                    <div id="email___content">
+                    <img src="https://factoriaf5.org/wp-content/uploads/2021/07/logo.png" alt="">
+                    <h2>Hola ${name}!</h2>
+                    <p>
+                        Has sido registrado exitosamente en la aplicación de gestión de salas de Factoria F5.
+                        Para poder ingresar a la aplicación, debes confirmar tu registro y crear tu contraseña
+                        haciendo clic en el siguiente enlace:
+                    </p>
+                    <a href="http://localhost:8080/api/v1/auth/confirm/${token}" target="_blank">Confirmar Cuenta</a>
+                    </div>
+                </body>
+            </html>
+        `;
 };

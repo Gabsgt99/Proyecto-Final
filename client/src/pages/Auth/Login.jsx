@@ -56,7 +56,7 @@ const Login = () => {
 
     return (
         <Layout>
-        <div className="container">
+        <div className="container-fluid">
             <div className="row">
             <img
                 src={loginImg}
@@ -71,7 +71,7 @@ const Login = () => {
             </h1>
             </div>
 
-            <div className="row">
+            <div className="row form-login">
             {/*  <div className="col-sm-6 bg-white p-5 align-items-center">
                 <FontAwesomeIcon icon={faCode} className="icon-code" />
             </div> */}

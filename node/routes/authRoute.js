@@ -1,5 +1,5 @@
 import express from "express";
-import {registerController, loginController, testController, sendPasswordLink } from "../controllers/authController.js";
+import {registerController, loginController, testController, sendPasswordLink, forgotPassword, newPassword } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddlewares.js";
 import { createBookingController } from "../controllers/bookingController.js";
 
@@ -19,10 +19,15 @@ router.post('/login', loginController);
 //BOOKINGS || POST
 router.post('/booking', createBookingController);
 
-//Test Routes
+//Test Routes || GET
 router.get('/test', requireSignIn, isAdmin, testController);
 
-// SEND RESET PASSWORD LINK || POST
+// SEND RESET PASSWORD LINK || POST & GET
 router.post("sendpasswordlink", sendPasswordLink);
+
+router.get("/forgotpassword/:id/:token", forgotPassword);
+
+//NEW PASSWORD || POST
+router.post("/:id/:token", newPassword);
 
 export default router;
