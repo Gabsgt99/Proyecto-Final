@@ -111,10 +111,143 @@ export const oneBookingController = async (req, res) => {
     res.status(500).send({
       success: false,
       error,
-      message: "Error al consultar la sala",
+      message: "Error al consultar la reserva",
     });
   }
 };
+
+
+// Obtener todas las reservas de una sala específica
+export const getBookingsByRoom = async (req, res) => {
+  try {
+    const roomId = req.params.id;
+    console.log(roomId);
+    
+    // Buscar todas las reservas de la sala específica en la base de datos
+    const bookings = await bookingModel.find({ room: roomId });
+    console.log(bookings);
+    res.status(200).json({ 
+      success: true, 
+      bookings });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error al obtener las reservas' });
+  }
+};
+
+
+
+/* export const getBookingsByUser = async (req, res) => {
+  try {
+    const userId = "64a68b590e95b932adb3b733";
+    
+    
+    // Buscar todas las reservas de la sala específica en la base de datos
+    const bookings = await bookingModel.find({ user: userId });
+    console.log(bookings);
+    res.status(200).json({ 
+      success: true, 
+      bookings });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error al obtener las reservas' });
+  }
+};
+
+ */
+
+
+
+export const getBookingsByUser = async (req, res) => {
+  try {
+    const userId = "64a68b590e95b932adb3b733";
+    
+    // Hacer una doble población para obtener los datos completos de usuario y sala en una sola consulta
+    const bookings = await bookingModel.find({ user: userId })
+      .populate({
+        path: 'user',
+        select: 'name' // Filtrar y obtener solo el campo 'name' del usuario
+      })
+      .populate({
+        path: 'room',
+        select: 'name' // Filtrar y obtener solo el campo 'name' de la sala
+      });
+
+    // Modificar cada objeto de reserva para eliminar el campo 'userId'
+    const formattedBookings = bookings.map(booking => {
+      const { _id, user, room, start_date, end_date, createdAt, updatedAt, __v } = booking;
+      return {
+        _id,
+        user: user.name, // Acceder al campo 'name' del usuario
+        room,
+        start_date,
+        end_date,
+        createdAt,
+        updatedAt,
+        __v
+      };
+    });
+
+    res.status(200).json({ 
+      success: true, 
+      bookings: formattedBookings
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error al obtener las reservas' 
+    });
+  }
+};
+
+//aqui no se accede al token, con el middleware se comprueba el admin
+export const getAllBookings = async (req, res) => {
+  try {
+    
+    // Hacer una doble población para obtener los datos completos de usuario y sala en una sola consulta
+    const bookings = await bookingModel.find()
+      .populate({
+        path: 'user',
+        select: 'name' // Filtrar y obtener solo el campo 'name' del usuario
+      })
+      .populate({
+        path: 'room',
+        select: 'name' // Filtrar y obtener solo el campo 'name' de la sala
+      });
+
+    // Modificar cada objeto de reserva para eliminar el campo 'userId'
+    const formattedBookings = bookings.map(booking => {
+      const { _id, user, room, start_date, end_date, createdAt, updatedAt, __v } = booking;
+      return {
+        _id,
+        user: user.name, // Acceder al campo 'name' del usuario
+        room,
+        start_date,
+        end_date,
+        createdAt,
+        updatedAt,
+        __v
+      };
+    });
+
+    res.status(200).json({ 
+      success: true, 
+      bookings: formattedBookings
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error al obtener las reservas' 
+    });
+  }
+};
+
 
 //delete booking ============================================================
 export const deleteBookingController = async (req, res) => {

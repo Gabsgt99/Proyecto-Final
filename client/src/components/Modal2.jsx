@@ -1,4 +1,4 @@
-
+/* 
 
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -32,3 +32,4 @@ function Example({ modalTitle, modalBody, handleCloseModal=false, action }) {
 }
 
 export default Example;
+ */

@@ -2,41 +2,46 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout.jsx";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import FullCalendarApp from './FullCalendar.jsx';
+import CalendarComponent from "../components/CalendarComponent.jsx";
+import ModalComponent from "../components/ModalComponent.jsx";
 
 const EachRoom = () => {
-  const {id} = useParams();
-  console.log(id, 'aquikatao');
+  const { id } = useParams();
   const [room, setRoom] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
-    if (id) { getRoom();
+    if (id) {
+      getRoom();
     }
-   // eslint-disable-next-line 
-    }, [id]);
+    // eslint-disable-next-line
+  }, [id]);
+
   const getRoom = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:8080/api/v1/rooms/${id}`, { 
-          method: "GET",
-          cors: {
-            origin: "http://localhost:8080"
-          }, 
-        })
-        
-      setRoom(data.rooms);                                                                        
-      console.log(data.json);
+      const { data } = await axios.get(`http://localhost:8080/api/v1/rooms/${id}`);
+      setRoom(data.rooms);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   };
-  console.log(room)
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleDateClick = (info) => {
+    setSelectedDate(info.event.start);
+    setIsModalOpen(true); // Set isModalOpen to true when a valid date is clicked
+  };
+
   return (
     <Layout>
       <div className="container-xl cont-xl">
         <div className="card-group">
           <div className="card">
-            <img
+          <img
               src={`http://localhost:8080/api/v1/rooms/room-photo/${id}`}
               className="card-img-top"
               alt={room.name}
@@ -51,10 +56,17 @@ const EachRoom = () => {
             </div>
           </div>
           <div className="card card-calendar">
-            <FullCalendarApp/>
+            <CalendarComponent roomId={id} isModalOpen={isModalOpen} handleDateClick={handleDateClick} />
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <ModalComponent
+          selectedDate={selectedDate}
+          isModalOpen={isModalOpen}
+          closeModal={handleModalClose}
+        />
+      )}
     </Layout>
   );
 };
