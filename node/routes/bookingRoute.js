@@ -6,6 +6,8 @@ import {
   deleteBookingController,
   oneBookingController,
   updateBookingController,
+  getBookingsByRoom,
+  getBookingsByUser
 } from "../controllers/bookingController.js";
 
 const router = express.Router();
@@ -40,5 +42,15 @@ router.delete(
   isAdmin,
   deleteBookingController
 );
+
+//get all booking by id
+router.get(
+  '/get-bookings/:id', 
+  getBookingsByRoom);
+
+  //get all booking by user
+router.get(
+  '/get-bookingsbyuser', 
+  getBookingsByUser);
 
 export default router;

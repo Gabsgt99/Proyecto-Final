@@ -144,10 +144,51 @@ export const oneBookingController = async (req, res) => {
     res.status(500).send({
       success: false,
       error,
-      message: "Error al consultar la sala",
+      message: "Error al consultar la reserva",
     });
   }
 };
+
+
+// Obtener todas las reservas de una sala específica
+export const getBookingsByRoom = async (req, res) => {
+  try {
+    const roomId = req.params.id;
+    console.log(roomId);
+    
+    // Buscar todas las reservas de la sala específica en la base de datos
+    const bookings = await bookingModel.find({ room: roomId });
+    console.log(bookings);
+    res.status(200).json({ 
+      success: true, 
+      bookings });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error al obtener las reservas' });
+  }
+};
+
+export const getBookingsByUser = async (req, res) => {
+  try {
+    const userId = "64a68b590e95b932adb3b733";
+    
+    
+    // Buscar todas las reservas de la sala específica en la base de datos
+    const bookings = await bookingModel.find({ user: userId });
+    console.log(bookings);
+    res.status(200).json({ 
+      success: true, 
+      bookings });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error al obtener las reservas' });
+  }
+};
+
 
 //delete booking ============================================================
 export const deleteBookingController = async (req, res) => {

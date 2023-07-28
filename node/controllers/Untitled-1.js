@@ -1,5 +1,5 @@
 
-import React from "react";
+/* import React from "react";
 import Layout from "../components/layout/Layout.jsx";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -27,4 +27,4 @@ import Example from '../components/Modal.jsx'
       );
     }
     
-    export default FullCalendarApp;
+    export default FullCalendarApp; */
