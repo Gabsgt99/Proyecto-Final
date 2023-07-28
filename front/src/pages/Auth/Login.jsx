@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import loginImg from "../../Assets/LoginImg.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
-import { Layout } from "../../components/Layout/Layout";
+import Layout  from "../../components/Layout/Layout";
 import axios from "axios";
 import { useAuth } from "../../components/context/AuthContext";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-function Login() {
+const  Login =  () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [auth, setAuth] = useAuth();
@@ -42,7 +42,7 @@ function Login() {
     <Layout>
       <div className="container-fluid">
         <div className="row">
-          <div className="col ">
+          <div className="col">
             <img
               src={loginImg}
               className="img-fluid"

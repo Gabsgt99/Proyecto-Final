@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(faLinkedin, faTwitter, faInstagram, faYoutube, faFacebook);
 
-export function Header() {
+ function Header() {
   const BurguerButton = () => {
     const [clicked, setClicked] = useState(false);
     const handleClick = () => {
@@ -56,3 +56,4 @@ export function Header() {
     </nav>
   );
 }
+export default Header;

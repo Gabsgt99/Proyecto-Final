@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../src/index.css";
-import { Layout } from "../components/Layout/Layout";
+import  Layout from "../components/Layout/Layout.jsx";
 
 const EditProfile = () => {
   const [name, setName] = useState("");

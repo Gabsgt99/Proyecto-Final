@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../src/index.css";
-import { Layout } from "../components/Layout/Layout";
+import Layout from "../components/Layout/Layout";
 
 function RegisterPage() {
   const [name, setName] = useState("");
@@ -23,7 +23,7 @@ function RegisterPage() {
       });
       if (res && res.data.success) {
         /* alert.success(res.data && res.data.message); */ //<===aqui va un mensaje popup de exito en el registro ======
-        navigate("/"); //Aqui poner a donde va despues del registro==========
+        navigate("/"); 
       } else {
         //<===aqui va un mensaje popup
         console.log(name, lastname, email, admin);
