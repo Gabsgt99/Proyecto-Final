@@ -7,7 +7,8 @@ import {
   oneBookingController,
   updateBookingController,
   getBookingsByRoom,
-  getBookingsByUser
+  getBookingsByUser,
+  getAllBookings
 } from "../controllers/bookingController.js";
 
 const router = express.Router();
@@ -53,4 +54,10 @@ router.get(
   '/get-bookingsbyuser', 
   getBookingsByUser);
 
+  //get all booking by user
+  router.get(
+    '/get-allbookings', 
+    getAllBookings);
+
 export default router;
+
