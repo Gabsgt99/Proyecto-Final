@@ -1,0 +1,40 @@
+
+.custom-list-group {
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .custom-button {
+    background: none;
+    border: 1px solid #9C9C9C;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .custom-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .title-user {
+    color: #FF4700;
+    font-weight: bolder;
+  }
+  
+  .list-group-item {
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(2, 1, 0, 0.3);
+    text-align: center;
+  }
+  
+  .list-group-item p.font-weight-bold {
+    color: #FF4700;
+  }
+  
+  .list-group-item button {
+    background: none;
+    border: 1px solid #9C9C9C;
+  }
+  
+  .list-group-item button:hover {
+    transform: scale(1.1);
+    background: none;
+  }

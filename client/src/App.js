@@ -6,7 +6,7 @@ import Login from './pages/Login.jsx';
 import Rooms from './pages/Rooms.jsx';
 import RoomManagement from './pages/RoomManagement';
 import EachRoom from './pages/EachRoom.jsx';
-import UserBookings from './components/UserBookings';
+import UserBookings from './pages/UserBookings';
 import AdminBookings from './components/AdminBookings';
 
 function App() {

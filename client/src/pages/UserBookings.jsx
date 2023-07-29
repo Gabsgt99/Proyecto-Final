@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
+import '../styles/UserBookings.css';
+
 
 const UserBookings = () => {
   const [userBookings, setUserBookings] = useState([]);
@@ -13,7 +16,7 @@ const UserBookings = () => {
       const response = await axios.get(`/api/v1/bookings/get-bookingsbyuser`);
       const bookings = response.data.bookings.map((booking) => ({
         ...booking,
-        room: booking.room.name // Filtrar y obtener solo el campo 'name' de la sala
+        room: booking.room.name, // Filtrar y obtener solo el campo 'name' de la sala
       }));
       setUserBookings(bookings);
     } catch (error) {
@@ -43,18 +46,34 @@ const UserBookings = () => {
   };
 
   return (
-    <ul className="list-group">
-      {userBookings.map((booking) => (
-        <li key={booking._id} className="list-group-item">
-          <p>Reserva ID: {booking._id}</p>
-          <p>Usuario: {booking.user}</p>
-          <p>Sala: {booking.room}</p> {/* Ahora solo contiene el nombre de la sala */}
-          <p>Fecha de inicio: {booking.start_date}</p>
-          <p>Fecha de fin: {booking.end_date}</p>
-          <button onClick={() => handleDeleteBooking(booking._id)}> <FontAwesomeIcon icon={faTrashAlt} style={{ color: "#d86b13" }} /></button>
-        </li>
-      ))}
-    </ul>
+    <div className="container mt-5">
+      <div className="d-flex justify-content-center">
+        <ul className="list-group custom-list-group">
+          {userBookings.map((booking) => (
+            <li key={booking._id} className="list-group-item mb-3 p-3 bg-white rounded">
+              <p className=" mb-1  title-user">Reserva ID:</p>
+              <p>{booking._id}</p>
+              <p className="mb-1 title-user">Sala:</p>
+              <p>{booking.room}</p>
+              <p className=" mb-1  title-user">Fecha de inicio:</p>
+              <p>{moment(booking.start_date).format('DD-MM-YYYY HH:mm')}</p>
+              <p className=" mb-1 title-user">Fecha de fin:</p>
+              <p>{moment(booking.end_date).format('DD-MM-YYYY HH:mm')}</p>
+              <button
+                className="btn btn-danger p-2 custom-button"
+                onClick={() => handleDeleteBooking(booking._id)}
+              >
+                <FontAwesomeIcon
+                  id={`button-${booking._id}`}
+                  icon={faTrashAlt}
+                  style={{ fontSize: '1.3em', color: '#020100' }}
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 
