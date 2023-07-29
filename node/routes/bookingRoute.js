@@ -39,8 +39,8 @@ router.get("/one-booking/:id", oneBookingController);
 //delete booking
 router.delete(
   "/delete-booking/:id",
-  requireSignIn,
-  isAdmin,
+  /* requireSignIn,
+  isAdmin, */
   deleteBookingController
 );
 

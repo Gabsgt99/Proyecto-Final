@@ -286,7 +286,7 @@ export const getAllBookings = async (req, res) => {
 export const deleteBookingController = async (req, res) => {
   try {
     const { id } = req.params;
-    await roomModel.findByIdAndDelete(id);
+    await bookingModel.findByIdAndDelete(id);
     res.status(200).send({
       success: true,
       message: "Sala eliminada",
