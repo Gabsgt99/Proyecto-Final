@@ -6,9 +6,6 @@ import { useAuth} from "../../context/Auth.jsx";
 
 const Layout = ({children}) => {
   const [auth] = useAuth();
-console.log("=============================");
-  console.log(auth);
-  console.log("=============================");
   return (
     <div>
     <Header/>

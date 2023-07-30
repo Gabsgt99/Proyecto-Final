@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-//import { useNavigate } from "react-router-dom";
 import "../../src/index.css";
 import Layout from "../components/Layout/Layout.jsx";
 import { toast } from "react-toastify";
@@ -10,7 +9,6 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [admin, setAdmin] = useState(false);
   const [isActive, setActive] = useState(null);
-  //const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +32,7 @@ const RegisterPage = () => {
       toast.error('Algo salió mal');
     }
   };
+  
   console.log(process.env.REACT_APP_API);
   return (
     <Layout>
@@ -55,19 +54,6 @@ const RegisterPage = () => {
                   autoFocus
                 />
               </div>
-              {/* <div className="form-group py-3">
-                <label htmlFor="lastName">Apellidos:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="lastName"
-                  name="lastName"
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
-                  required
-                  autoFocus
-                />
-              </div> */}
               <div className="form-group py-3">
                 <label htmlFor="email">Email:</label>
                 <input
@@ -87,13 +73,6 @@ const RegisterPage = () => {
                   onChange={(e) => setAdmin(e.target.checked)} />
                 <label className="form-check-label" for="flexSwitchCheckDefault">Es Admin?</label>
               </div>
-                {/* <label style={{ marginRight: "5px" }}>Admin:</label>
-                <input
-                  type="checkbox"
-                  name="admin"
-                  checked={admin}
-                  onChange={(e) => setAdmin(e.target.checked)}
-                /> */}
               </div>
               <div className="button-container">
                 <button

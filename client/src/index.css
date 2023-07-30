@@ -146,8 +146,41 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.form-log {
+  position: relative;
+}
+
+.position-icon {
+  position: absolute!important;
+  top: 53.5%;
+  left: 94%;
+}
+
 .row > img{
   padding: 0;
+}
+
+/* Form - showpassword */
+.pointer {
+  cursor: pointer;
+}
+
+.position-absolute {
+  top: 53.5%;
+  left: 89%;
+}
+
+.form-pass {
+  position: relative;
+  width: 50%;
+}
+
+.form-forgot {
+  padding: 5% 0;
+}
+
+.form-data input::placeholder { 
+  color: rgba(156,156,156,.75)!important; 
 }
 
 /* font-family: 'Fira Code', monospace;

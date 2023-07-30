@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import BurguerButton from '../BurguerButton.jsx';
+import BurguerButton from './BurguerButton.jsx';
 import { useAuth} from "../../context/Auth.jsx";
 import { toast } from 'react-toastify';
 
@@ -17,7 +17,6 @@ const Navbar = () => {
   };
   const [clicked, setClicked] = useState(false)
   const handleClick = () => {
-    //cuando esta true lo pasa a false y vice versa
     setClicked(!clicked)
   }
   return (

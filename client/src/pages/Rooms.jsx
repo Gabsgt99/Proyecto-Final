@@ -41,7 +41,7 @@ const Rooms = () => {
                         <div className="col-md-8">
                             <div className="card-body allrooms-cbody">
                                 <h5 className="card-title allrooms-ctitle">{r.name}</h5>
-                                <p className="card-text">{r.description.substring(0, 500)}...</p>
+                                <p className="card-text">{r.description.substring(0, 500)}</p>
                                 <p className="card-text">Aforo máx: {r.capacity}</p>
                                 <Link
                                 className="link ms-1 goroom"
@@ -61,5 +61,3 @@ const Rooms = () => {
 }
 
 export default Rooms;
-
-//{ Match.mod(i/2) == 0 ? 'aqui se pone la clase con el reverse' : ''}

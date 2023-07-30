@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout.jsx";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import FullCalendarApp from './FullCalendar.jsx';
+//import FullCalendarApp from './FullCalendar.jsx';
 
 const EachRoom = () => {
   const {id} = useParams();
@@ -51,7 +51,7 @@ const EachRoom = () => {
             </div>
           </div>
           <div className="card card-calendar">
-            <FullCalendarApp/>
+            {/* <FullCalendarApp/> */}
           </div>
         </div>
       </div>

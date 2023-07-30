@@ -23,11 +23,11 @@ router.post('/booking', createBookingController);
 router.get('/test', requireSignIn, isAdmin, testController);
 
 // SEND RESET PASSWORD LINK || POST & GET
-router.post("sendpasswordlink", sendPasswordLink);
+router.post("/sendpasswordlink", sendPasswordLink);
 
-router.get("/forgotpassword/:id/:token", forgotPassword);
+router.get("/forgotpassword", forgotPassword);
 
 //NEW PASSWORD || POST
-router.post("/:id/:token", newPassword);
+router.post("/newPassword", newPassword);
 
 export default router;

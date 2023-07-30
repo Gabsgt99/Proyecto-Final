@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/FPassandRPass.css';
 import Layout from './Layout/Layout.jsx';
+import axios from 'axios';
 
 
 const PasswordReset = () => {
 
     const [email, setEmail] = useState("");
-
-    const [message, setMessage] = useState("");
-
-    const setVal = (e) => {
-        setEmail(e.target.value)
-    }
+    //const [message, setMessage] = useState("");
+    const navigate = useNavigate();
+    const location = useLocation();
+    const setVal = (e) => { setEmail(e.target.value) }
 
     const sendLink = async (e) => {
         e.preventDefault();
-
         if (email === "") {
             toast.error("Escribe un correo!", {
                 position: "top-center"
@@ -26,23 +27,18 @@ const PasswordReset = () => {
                 position: "top-center"
             });
         } else {
-            const res = await fetch("/sendpasswordlink", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email })
+            const response = await axios.post("/api/v1/auth/sendpasswordlink", {
+                email,
             });
-
-            const data = await res.json();
-
-            if (data.status === 201) {
+            if (response.status === 201) {
                 setEmail("");
-                setMessage(true)
+                //setMessage(true);
+                toast.success("Te hemos enviado un correo electrónico con un link",{ position: "top-center" });
+                setTimeout(() => {
+                    navigate(location.state || "/");
+                }, 2000);
             } else {
-                toast.error("Invalid User",{
-                    position: "top-center"
-                })
+                toast.error("Invalid User",{ position: "top-center" });
             }
         }
     }
@@ -57,7 +53,6 @@ const PasswordReset = () => {
                     <ToastContainer 
                         position="top-center"
                     />
-                    {message ? <p style={{ color: "green", fontWeight: "bold" }}>Te hemos enviado un correo electrónico con un link</p> : ""}
                     <form>
                         <div className="form_input">
                             <label htmlFor="email">Escribe tu correo electrónico</label>
