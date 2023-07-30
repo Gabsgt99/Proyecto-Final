@@ -25,21 +25,13 @@ const Navbar = () => {
         <span></span>
         <div className={`links ${clicked ? '' : ''}`}>
           <a onClick={handleClick} href="/">HOME</a>
-          {auth.user.isadmin ? (
+          {/* {auth.user.isadmin ? ( */}
           <>
-          <li className="nav-item dropdown">
-          {/* eslint-disable-next-line */}
-          <a className='nav-link dropdown-toggle' role='button' data-bs-toggle="dropdown" aria-expanded="false" href="#">{auth?.user?.name}</a>
-          <ul className="dropdown-menu">
-          <li><a className="dropdown-item" onClick={handleLogout} href="/login">Logout</a>
-          </li>
-        
-        </ul>
-        </li>
+          <a onClick={handleClick} href="#">Hola! {auth?.user?.name}</a>
+          <a onClick={handleClick} href="/">DASHBOARD</a>
+          <a onClick={handleLogout} href="/">LOGOUT</a>
         </>
-          ) : (<>
-
-          </>) }
+         {/*  ) : ('') } */}
           </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
@@ -70,6 +62,7 @@ const NavContainer = styled.nav`
     color: white;
     text-decoration: none;
     margin-right: 3rem;
+    text-transform:uppercase;
   }  
   .links{
     position: absolute;

@@ -17,11 +17,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login/>} />
         <Route path="/password-reset" element={<PasswordReset />}/>
-        {/* <Route path="/sendpasswordlink" element={<sendPasswordLink />}/> */}
         <Route path="/forgotpassword" element={<ForgotPassword />}/>
-       {/*  <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />} /> */}
-        <Route path="user" element={<PrivateRoute/>}>
-          <Route path='/user-panel' element={<UserPanel/>}/>
+        <Route path="/user-panel" element={<PrivateRoute/>}>
+          <Route path='user' element={<UserPanel/>}/>
         </Route>
         <Route path="admin" element={<AdminRoute/>}>
           <Route path='/admin-panel' element={<AdminPanel/>}/>

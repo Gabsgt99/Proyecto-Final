@@ -26,9 +26,7 @@ const PasswordReset = () => {
                 position: "top-center"
             });
         } else {
-            const response = await axios.post("/api/v1/auth/sendpasswordlink", {
-                email,
-            });
+            const response = await axios.post("/api/v1/auth/sendpasswordlink", { email: email });
             if (response.status === 201) {
                 setEmail("");
                 toast.success("Te hemos enviado un correo electrónico con un link",{ position: "top-center" });

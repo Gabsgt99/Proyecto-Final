@@ -26,13 +26,14 @@ router.get("/get-rooms", requireSignIn, roomController);
 //single room || GET
 router.get("/:id", requireSignIn, singleRoomController);
 
-//get photo || GET
-router.get("/room-photo/:pid", requireSignIn, roomPhotoController);
-
 //delete room || DELETE
 router.delete( "/delete-room/:id", requireSignIn, deleteRoomController);
 
 // ROUTING WITHOUT AUTH.
+
+//get photo || GET
+router.get("/room-photo/:pid", roomPhotoController);
+
 // ROUTING FOR TESTING
 
 export default router;
