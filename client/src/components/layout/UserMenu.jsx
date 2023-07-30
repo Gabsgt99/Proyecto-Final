@@ -7,8 +7,8 @@ const UserMenu = () => {
         <div className='text-center'>
             <div className="list-group">
                 <h4>Menú de Usuario</h4>
-                <NavLink to="/dashboard/user/profile" className="list-group-item">Perfil de Usuario</NavLink>
-                <NavLink to="/dashboard/user" className="list-group-item">X</NavLink>
+                <NavLink to="/panel/user/profile" className="list-group-item">Perfil de Usuario</NavLink>
+                <NavLink to="/panel/user" className="list-group-item">X</NavLink>
             </div>
         </div>
     </>

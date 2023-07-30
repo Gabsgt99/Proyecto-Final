@@ -103,7 +103,7 @@ export const roomPhotoController = async (req, res) => {
 //delete controller
 export const deleteRoomController = async (req, res) => {
   try {
-    await roomModel.findByIdAndDelete(req.params.pid).select("-photo");
+    await roomModel.findByIdAndDelete(req.params.id);
     res.status(200).send({
       success: true,
       message: "Room Deleted successfully",
@@ -118,41 +118,28 @@ export const deleteRoomController = async (req, res) => {
   }
 };
 
-//update rooms
 export const updateRoomController = async (req, res) => {
   try {
-    const { name, description, capacity } =
-      req.fields;
+    const { name, description, capacity } = req.body; // Usar req.body en lugar de req.fields
     const { photo } = req.files;
-    //Validation
-    /*switch (true) {
-      case !name:
-        return res.status(500).send({ error: "Name is Required" });
-      case !description:
-        return res.status(500).send({ error: "Description is Required" });
-      case !price:
-        return res.status(500).send({ error: "Price is Required" });
-      case !category:
-        return res.status(500).send({ error: "Category is Required" });
-      case !quantity:
-        return res.status(500).send({ error: "Quantity is Required" });
-      case photo && photo.size > 1000000:
-        return res
-          .status(500)
-          .send({ error: "photo is Required and should be less then 1mb" });
-    }*/
 
-    const rooms = await roomModel.findByIdAndUpdate(
-      req.params.pid,
-      { ...req.fields, slug: slugify(name) },
-      { new: true }
-    );
+    const rooms = await roomModel.findById(req.params.pid);
+
+    rooms.name = name;
+    rooms.description = description;
+    rooms.capacity = capacity;
+    rooms.slug = slugify(name);
+
     if (photo) {
-      rooms.photo.data = fs.readFileSync(photo.path);
+      // Leer el archivo adjunto con fs
+      const fileData = fs.readFileSync(photo.path);
+      rooms.photo.data = fileData;
       rooms.photo.contentType = photo.type;
     }
+
     await rooms.save();
-    res.status(201).send({
+
+    res.status(200).send({
       success: true,
       message: "Room Updated Successfully",
       rooms,

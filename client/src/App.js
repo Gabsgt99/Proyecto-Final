@@ -10,6 +10,7 @@ import PrivateRoute from './components/Routes/Private.jsx';
 import AdminRoute from './components/Routes/AdminRoute.jsx';
 import UserPanel from './pages/User/UserPanel.jsx';
 import AdminPanel from './pages/Admin/AdminPanel.jsx';
+import RoomManagement from './pages/Admin/RoomManagement';
 
 function App() {
   return (
@@ -20,11 +21,13 @@ function App() {
         {/* <Route path="/sendpasswordlink" element={<sendPasswordLink />}/> */}
         <Route path="/forgotpassword" element={<ForgotPassword />}/>
        {/*  <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />} /> */}
-        <Route path="user" element={<PrivateRoute/>}>
-          <Route path='/user-panel' element={<UserPanel/>}/>
+        <Route path="/panel" element={<PrivateRoute/>}>
+          <Route path='user' element={<UserPanel/>}/>
+          <Route path='user/profile' element={<UserPanel/>}/>
         </Route>
-        <Route path="admin" element={<AdminRoute/>}>
-          <Route path='/admin-panel' element={<AdminPanel/>}/>
+        <Route path="/panel" element={<AdminRoute/>}>
+          <Route path='admin' element={<AdminPanel/>}/>
+          <Route path='admin/gestionsalas' element={<RoomManagement/>}/>
         </Route>
         <Route path='/rooms' element={<Rooms/>}/>
         <Route path='/rooms/:id' element={<EachRoom/>}/>
