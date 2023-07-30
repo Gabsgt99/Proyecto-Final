@@ -11,7 +11,6 @@ import axios from 'axios';
 const PasswordReset = () => {
 
     const [email, setEmail] = useState("");
-    //const [message, setMessage] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
     const setVal = (e) => { setEmail(e.target.value) }
@@ -32,7 +31,6 @@ const PasswordReset = () => {
             });
             if (response.status === 201) {
                 setEmail("");
-                //setMessage(true);
                 toast.success("Te hemos enviado un correo electrónico con un link",{ position: "top-center" });
                 setTimeout(() => {
                     navigate(location.state || "/");

@@ -6,28 +6,34 @@ import { createBookingController } from "../controllers/bookingController.js";
 //router object
 const router = express.Router()
 
-//routing
-// REGISTER || METHOD POST
-router.post('/register', registerController);
+// ROUTING WITHOUT AUTH.
 
-//CONFIRM-CREATE PASSWORD || METHOD POST
-//router.post('/confirm', passController);
-
-//LOGIN || POST
+//Login || POST
 router.post('/login', loginController);
 
-//BOOKINGS || POST
-router.post('/booking', createBookingController);
-
-//Test Routes || GET
-router.get('/test', requireSignIn, isAdmin, testController);
+//Forgot password || POST
+router.get("/forgotpassword", forgotPassword);
 
 // SEND RESET PASSWORD LINK || POST & GET
 router.post("/sendpasswordlink", sendPasswordLink);
 
-router.get("/forgotpassword", forgotPassword);
-
 //NEW PASSWORD || POST
 router.post("/newPassword", newPassword);
+
+// ROUTING WITH AUTH.
+
+// Register || POST
+router.post('/register', requireSignIn, isAdmin, registerController);
+
+//Protected User route auth || GET
+router.get('/user-auth', requireSignIn, (req,res) => { res.status(200).send({ok:true}) });
+
+//Protected Admin route auth || GET
+router.get('/admin-auth', requireSignIn,isAdmin, (req,res) => { res.status(200).send({ok:true}) });
+
+// ROUTING FOR TESTING
+
+//Test Routes || GET
+router.get('/test', requireSignIn, isAdmin, testController);
 
 export default router;

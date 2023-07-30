@@ -54,87 +54,12 @@ export const registerController = async(req,res) => {
     }
 };
 
-//Validate user
-/* const confirm = async (req, res) => {
-    try {
-
-       // Get token
-       const { token } = req.params;
-       
-       // Check data
-       const data = await getTokenData(token);
-
-       if(!data) {
-            return res.json({
-                success: false,
-                msg: 'Error al obtener data'
-            });
-       }
-
-       console.log(data);
-
-       const { email, code } = data.data;
-
-       // Check existing user
-       const user = await userModel.findOne({ email });
-
-       if(!user) {
-            return res.json({
-                success: false,
-                msg: 'Usuario no existe'
-            });
-       }
-
-       
-       //Update status
-       user.status = 'VERIFIED';
-       await user.save();
-
-
-      // return res.redirect('/confirm.html');
-
-      //****BUSCAR A DONDE VA DESPUES DE CONFIRMAR*****
-        
-    } catch (error) {
-        console.log(error);
-        return res.json({
-            success: false,
-            msg: 'Error al confirmar usuario'
-        });
-    }
-}; */
-
-//Validated user create a password
-/* export const passController = async (req,res) => {
-    try {
-        const password = req.body;
-        if(!password){
-            return res.send({error:'Escriba una contraseña'});
-        }
-    const hashedPassword = await hashPassword(password);
- //save
-    const user = await new userModel({password:hashedPassword}).save();
-        res.status(201).send({
-            success:true,
-            message:'Password registrado con exito',
-            user,
-        });
-        } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success:false,
-            message:'Error en el registro del password',
-            error,
-        });
-    }
-}; */
-
 
 // * LOGIN || POST*
 export const loginController = async(req,res) => {
     try {
         const {email,password} = req.body;
-        //VALIDATION ********************************
+        //VALIDATION 
         if(!email || !password){
             return res.status(404).send({
                 success:false,
@@ -193,8 +118,6 @@ export const testController = (req, res) => {
 };
 
 //EMAIL CONFIG
-
-
 //Send email for reset password
 export const sendPasswordLink = async(req,res) => {
     console.log(req.body);
@@ -216,7 +139,7 @@ export const sendPasswordLink = async(req,res) => {
                 const mailOptions = {
                     to: email,
                     subject:"Enlace para resetear la contraseña, FactoriaF5",
-                    text:`Este enlace sólo sera valido durante 48 horas http://localhost:3000/forgotpassword/${user.id}/${setusertoken.token}`
+                    text:`Este enlace sólo sera valido durante 48 horas http://localhost:3000/forgotpassword?id=${user.id}&&token=${user.token}`
                 }
                 sendEmail(mailOptions.to, mailOptions.subject, mailOptions.text);
                 res.status(201).json({status:201,message:"Se ha enviado un email para recuperar contraseña"})
@@ -231,7 +154,7 @@ export const sendPasswordLink = async(req,res) => {
     }
 };
 
-// verify user for forgot password time
+// verify user for forgot password 
 export const forgotPassword = async(req,res)=>{
     const {id,token} = req.query;
     try {
