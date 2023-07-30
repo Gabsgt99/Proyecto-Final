@@ -2,8 +2,8 @@ import bookingModel from "../models/bookingModel.js";
 import mongoose from "mongoose";
 
 
-
-export const createBookingController = async (req,res) => {
+//EL MODELO FINAL
+/* export const createBookingController = async (req,res) => {
     try {
         console.log(req.body);
         const {userId, roomId, startDate, endDate} = req.body;
@@ -49,10 +49,61 @@ export const createBookingController = async (req,res) => {
             message: "Error al hacer la reserva",
         });
     }
+}; 
+
+ */
+
+export const createBookingController = async (req, res) => {
+  try {
+    const { userId, roomId, startDate, endDate } = req.body;
+    if (!startDate || !endDate) {
+      return res.status(401).send({ message: "Seleccione la hora de inicio y finalización" });
+    }
+
+    // Comprobar si hay reservas que se superponen con las fechas dadas
+    const compareEvent = {
+      room: new mongoose.Types.ObjectId(roomId),
+      $or: [
+        // La nueva reserva comienza dentro del rango de una reserva existente
+        { start_date: { $lt: endDate }, end_date: { $gt: startDate } },
+        // La nueva reserva termina dentro del rango de una reserva existente
+        { start_date: { $lt: startDate }, end_date: { $gt: endDate } },
+        // La nueva reserva abarca completamente una reserva existente
+        { start_date: { $gte: startDate }, end_date: { $lte: endDate } }
+      ],
+    };
+
+    const existingEvent = await bookingModel.countDocuments(compareEvent);
+
+    if (existingEvent > 0) {
+      return res.status(401).send({
+        success: false,
+        message: "Ya existe una reserva que se superpone a esa hora",
+      });
+    }
+
+    // Si no hay reservas que se superpongan, crear la reserva
+    const booking = await new bookingModel({
+      user: userId,
+      room: roomId,
+      start_date: startDate,
+      end_date: endDate,
+    }).save();
+
+    res.status(201).send({
+      success: true,
+      message: "Has hecho una reserva",
+      booking,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error al hacer la reserva",
+    });
+  }
 };
-
-
-
 
 /* export const createBookingController = async (req, res) => {
   try {

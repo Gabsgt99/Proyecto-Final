@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+/* import React, {useState} from "react";
 import TimePicker from "rc-time-picker";
 import moment from "moment";
 import "rc-time-picker/assets/index.css";
@@ -19,4 +19,4 @@ export default function TimePickerComp({initial}) {
       />
     
     );
-};
+}; */

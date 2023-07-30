@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import axios from 'axios';
-import { formatDate } from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -11,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-const CalendarComponent = ({ roomId }) => {
+const CalendarComponent = ({ roomId, userRole }) => {
   const calendarRef = useRef(null);
 
   const [error, setError] = useState('');
@@ -58,16 +57,50 @@ const CalendarComponent = ({ roomId }) => {
     const selectedHour = parseInt(startTime.split(':')[0]);
     const selectedMinute = parseInt(startTime.split(':')[1]);
 
+    // Verificar que la fecha actual esté dentro del rango permitido
+    const maxReservationDate = new Date(selectedDate);
+    if (userRole === 'normal') {
+      maxReservationDate.setDate(maxReservationDate.getDate() - 14);
+      if (currentTime < maxReservationDate) {
+        setError('La fecha seleccionada debe estar dentro del rango permitido (hasta 14 días antes de la fecha de la reserva)');
+        return;
+      }
+    }
+
     if (
       selectedDate.toDateString() === currentTime.toDateString() &&
       (selectedHour < currentHour || (selectedHour === currentHour && selectedMinute < currentMinute))
     ) {
       setError('La hora de inicio debe ser mayor o igual a la hora actual');
+      return;
     } else if (startTime >= endTime) {
       setError('La hora de fin debe ser mayor a la hora de inicio de la reserva');
+      return;
     } else {
       const startTimeFormatted = moment(`${startDate}T${startTime}`).format();
       const endTimeFormatted = moment(`${startDate}T${endTime}`).format();
+
+      // Verificar restricciones adicionales para usuarios normales
+      if (userRole === 'normal') {
+        const maxDuration = 2; // Máxima duración en horas para usuarios normales
+        const durationInHours = moment(endTimeFormatted).diff(startTimeFormatted, 'hours');
+        if (durationInHours > maxDuration) {
+          setError('La duración máxima de la reserva para usuarios normales es de 2 horas');
+          return;
+        }
+
+        // Verificar superposición de horarios
+        if (!checkReservationAvailability(startTimeFormatted, endTimeFormatted)) {
+          setError('Ya existe una reserva en ese rango de horas');
+          return;
+        }
+      }
+
+      // Verificar superposición de horarios
+      if (!checkReservationAvailability(startTimeFormatted, endTimeFormatted)) {
+        setError('Ya hay una reserva existente con esos datos');
+        return;
+      }
 
       const newReservation = {
         userId: '64a68b590e95b932adb3b733', // Assuming you have the user ID
@@ -153,6 +186,26 @@ const CalendarComponent = ({ roomId }) => {
   const startTime = `${Math.max(currentHour, 8).toString().padStart(2, '0')}:00`;
   const endTime = '18:00';
 
+  // Función para verificar superposición de horarios
+  const checkReservationAvailability = (newStart, newEnd) => {
+    for (const event of events) {
+      const eventStart = moment(event.start);
+      const eventEnd = moment(event.end);
+      const newStartTime = moment(newStart);
+      const newEndTime = moment(newEnd);
+
+      if (
+        (newStartTime.isSameOrAfter(eventStart) && newStartTime.isBefore(eventEnd)) ||
+        (newEndTime.isAfter(eventStart) && newEndTime.isSameOrBefore(eventEnd)) ||
+        (newStartTime.isBefore(eventStart) && newEndTime.isAfter(eventEnd))
+      ) {
+        return false; // Existe superposición de horarios
+      }
+    }
+
+    return true; // No hay superposición de horarios
+  };
+
   return (
     <div className='demo-app'>
       <div className='demo-app-main'>
@@ -235,7 +288,7 @@ const CalendarComponent = ({ roomId }) => {
 
 export default CalendarComponent;
 
-// Helper function to generate time options with a given step
+// Helper function para generar opciones de tiempo
 const generateTimeOptions = (startTime, endTime, step) => {
   const start = moment(startTime, 'HH:mm');
   const end = moment(endTime, 'HH:mm');
