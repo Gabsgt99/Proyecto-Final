@@ -8,18 +8,10 @@ export const createRoomController = async (req, res) => {
         req.fields;
       const { photo } = req.files;
       //Validation
-      /* switch (true) {
-        case !name:
-          return res.status(500).send({ error: "Name is Required" });
-        case !description:
-          return res.status(500).send({ error: "Description is Required" });
-        case !capacity:
-          return res.status(500).send({ error: "Capacity is Required" });
-        case photo && photo.size > 10000000:
-          return res
-            .status(500)
-            .send({ error: "photo is Required and should be less then 10mb" });
-      } */
+      if (!name || !description || !capacity || !photo ) {
+            res.status(500)
+            .send({ error: "All fields must be filled and photo should be less then 10mb" });
+      } 
   
       const rooms = new roomModel({ ...req.fields, slug: slugify(name) });
       if (photo) {

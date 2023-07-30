@@ -13,36 +13,28 @@ import {
 
 const router = express.Router();
 
-//routes
-// create booking
-router.post(
-  "/create-booking",
-  //requireSignIn,
-  //isAdmin,
-  createBookingController
-);
+// ROUTING WITH AUTH.
 
-//update booking
-router.put(
-  "/update-booking/:id",
-  requireSignIn,
-  isAdmin,
-  updateBookingController
-);
+// create booking || POST
+router.post( "/create-booking", requireSignIn, isAdmin, createBookingController);
 
-//get all bookings
-router.get("/get-bookings", bookingController);
+//update booking || PUT
+router.put("/update-booking/:id", requireSignIn, isAdmin, updateBookingController );
 
-//single booking
-router.get("/one-booking/:id", oneBookingController);
+//get all bookings || GET
+router.get("/get-bookings", requireSignIn, bookingController);
 
-//delete booking
-router.delete(
-  "/delete-booking/:id",
-  /* requireSignIn,
-  isAdmin, */
-  deleteBookingController
-);
+//single booking || GET
+router.get("/one-booking/:id", requireSignIn, oneBookingController);
+
+//delete booking || DELETE
+router.delete( "/delete-booking/:id", requireSignIn, isAdmin, deleteBookingController );
+
+//TODO: validar si es necesaria esta ruta para eliminarla o habilitarla BOOKINGS || POST
+//router.post('/booking', requireSignIn, isAdmin, createBookingController);
+
+// ROUTING WITHOUT AUTH.
+// ROUTING FOR TESTING
 
 //get all booking by id
 router.get(

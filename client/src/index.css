@@ -113,6 +113,76 @@
   display: none!important;
 } */
 
+/*REGISTRO*/
+.form-control:focus {
+  border-color: #ff4700!important;
+  box-shadow: initial!important;
+}
+
+.form-check-input:checked {
+  background-color: #ff4700!important;
+  border-color: #ff4700!important;
+}
+
+.form-check-input:focus {
+  border-color: #9c9c9c!important;
+  box-shadow: 0 0 0 0.25rem rgba(156,156,156,.25)!important;
+}
+
+.form-switch .form-check-input:focus {
+--bs-form-switch-bg: url(data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27rgba%280,0, 0, 0.25%29%27/%3e%3c/svg%3e)!important;
+}
+
+/* LOGIN */
+.logincol{
+  background-color: #ff4700;
+  height: auto;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+}
+
+.form-login{
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-log {
+  position: relative;
+}
+
+.position-icon {
+  position: absolute!important;
+  top: 53.5%;
+  left: 94%;
+}
+
+.row > img{
+  padding: 0;
+}
+
+/* Form - showpassword */
+.pointer {
+  cursor: pointer;
+}
+
+.position-absolute {
+  top: 53.5%;
+  left: 89%;
+}
+
+.form-pass {
+  position: relative;
+  width: 50%;
+}
+
+.form-forgot {
+  padding: 5% 0;
+}
+
+.form-data input::placeholder { 
+  color: rgba(156,156,156,.75)!important; 
+}
+
 /* font-family: 'Fira Code', monospace;
 font-family: 'Poppins', sans-serif;
 font-family: 'Rubik', sans-serif; */

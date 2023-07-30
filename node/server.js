@@ -7,21 +7,6 @@ import roomRoute from './routes/roomRoute.js';
 import bookingRoute from './routes/bookingRoute.js';
 import cors from 'cors';
 
-//CORS Authorizations
-/* const whitelist = [
-    "http://localhost:8080",
-    "http://localhost:8081",
-];
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        }else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-}; */
-
 //configure env
 dotenv.config();
 

@@ -4,11 +4,15 @@ import userModel from '../models/userModel.js';
 //Protected routes token base
 export const requireSignIn = async (req,res,next) => {
     try {
+
         const decode = JWT.verify(req.headers.authorization, process.env.JWT_SECRET);
         req.user = decode;
         next();
     } catch (error) {
-        console.log(error);
+        console.clear();
+        console.log(req.headers);
+        console.log("==========");
+        return res.status(401).send({ success:false, message:'Acceso no autorizado' });
     }
 };
 
@@ -16,13 +20,13 @@ export const requireSignIn = async (req,res,next) => {
 export const isAdmin = async (req, res, next) => {
     try {
         const user = await userModel.findById(req.user._id);
-        if(user.role !== 1){
+        if(user.admin.authorization){
+            next();
+        }else {
             return res.status(401).send({
                 success:false,
                 message:'Acceso no autorizado'
             });
-        }else {
-            next();
         }
     } catch (error) {
         console.log(error);

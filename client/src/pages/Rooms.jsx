@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Layout from "../components/layout/Layout.jsx";
+import Layout from "../components/Layout/Layout.jsx";
 import { FaChevronRight } from "react-icons/fa6";
 
 const Rooms = () => {
     const [rooms, setRooms] = useState([]);
-    //const [loading, setLoading] = useState(false);
     const getRooms = async () => {
         try {
-            //setLoading(true);
-            //console.log(data);
-            const { data } = await axios.get('http://localhost:8080/api/v1/rooms/get-rooms',{
+            const authStorage = JSON.parse(localStorage.getItem("auth"));
+            console.log("=====");
+            const { data } = await axios.get('/api/v1/rooms/get-rooms',{
                 method: "GET",
                 cors: true,
+                headers: {
+                    Authorization: authStorage.token,
+                }
             });
-            //setLoading(false);
             console.log(data);
             setRooms(data.rooms);
-            } catch (error) {
-            //setLoading(false);
+        } catch (error) {
             console.log(error);
-            }      
-        };
-        useEffect(() => {
-            getRooms();
-          }, []);
+        }      
+    };
+    useEffect(() => {
+    getRooms();
+    }, []);
     return (
     <Layout>
         <div className='grid text-center'>
@@ -61,5 +61,3 @@ const Rooms = () => {
 }
 
 export default Rooms;
-
-//{ Match.mod(i/2) == 0 ? 'aqui se pone la clase con el reverse' : ''}

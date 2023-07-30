@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../components/layout/Layout.jsx";
+import Layout from "../components/Layout/Layout.jsx";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import CalendarComponent from "../components/CalendarComponent.jsx";

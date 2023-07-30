@@ -1,5 +1,5 @@
 import express from "express";
-//import { isAdmin, requireSignIn } from "../middlewares/authMiddlewares.js";
+import { isAdmin, requireSignIn } from "../middlewares/authMiddlewares.js";
 import {
   roomController,
   createRoomController,
@@ -12,39 +12,28 @@ import formidable from 'express-formidable';
 
 const router = express.Router();
 
-//routes
-// create rooms
-router.post(
-  "/create-room",
-  //requireSignIn,
-  //isAdmin,
-  formidable(),
-  createRoomController
-);
+// ROUTING WITH AUTH.
 
-//update room
-router.put(
-  "/update-room/:id",
-  //requireSignIn,
-  //isAdmin,
-  updateRoomController
-);
+// create rooms || POST
+router.post( "/create-room", requireSignIn, isAdmin, formidable(), createRoomController );
 
-//getAll rooms
-router.get("/get-rooms", roomController);
+//update room || PUT
+router.put( "/update-room/:id", requireSignIn, isAdmin, updateRoomController);
 
-//single room
-router.get("/:id", singleRoomController);
+//getAll rooms || GET
+router.get("/get-rooms", requireSignIn, roomController);
 
-//get photo
+//single room || GET
+router.get("/:id", requireSignIn, singleRoomController);
+
+//delete room || DELETE
+router.delete( "/delete-room/:id", requireSignIn, deleteRoomController);
+
+// ROUTING WITHOUT AUTH.
+
+//get photo || GET
 router.get("/room-photo/:pid", roomPhotoController);
 
-//delete room
-router.delete(
-  "/delete-room/:id",
-  //requireSignIn,
-  //isAdmin,
-  deleteRoomController
-);
+// ROUTING FOR TESTING
 
 export default router;

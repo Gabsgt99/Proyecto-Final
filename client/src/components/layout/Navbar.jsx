@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import BurguerButton from '../BurguerButton.jsx';
+import BurguerButton from './BurguerButton.jsx';
+import { useAuth} from "../../context/Auth.jsx";
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
- 
+  const [auth, setAuth] = useAuth();
+  const handleLogout = () => {
+    setAuth({
+        ...auth, 
+        user:null,
+        token:"",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Te has deslogueado");
+  };
   const [clicked, setClicked] = useState(false)
   const handleClick = () => {
-    //cuando esta true lo pasa a false y vice versa
     setClicked(!clicked)
   }
   return (
@@ -15,10 +25,14 @@ const Navbar = () => {
         <span></span>
         <div className={`links ${clicked ? '' : ''}`}>
           <a onClick={handleClick} href="/">HOME</a>
-          <a onClick={handleClick} href="/">USUARIO</a>
-          <a onClick={handleClick} href="https://factoriaf5.org/">CERRAR</a>
-          
-        </div>
+          {/* {auth.user.isadmin ? ( */}
+          <>
+          <a onClick={handleClick} href="#">Hola! {auth?.user?.name}</a>
+          <a onClick={handleClick} href="/">DASHBOARD</a>
+          <a onClick={handleLogout} href="/">LOGOUT</a>
+        </>
+         {/*  ) : ('') } */}
+          </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>
@@ -48,6 +62,7 @@ const NavContainer = styled.nav`
     color: white;
     text-decoration: none;
     margin-right: 3rem;
+    text-transform:uppercase;
   }  
   .links{
     position: absolute;
