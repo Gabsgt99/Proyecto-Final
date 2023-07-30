@@ -23,7 +23,7 @@ router.post("/newPassword", newPassword);
 // ROUTING WITH AUTH.
 
 // Register || POST
-router.post('/register', requireSignIn, isAdmin, registerController);
+router.post('/register', /* requireSignIn, isAdmin,  */ registerController);
 
 //Protected User route auth || GET
 router.get('/user-auth', requireSignIn, (req,res) => { res.status(200).send({ok:true}) });
