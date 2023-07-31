@@ -11,6 +11,7 @@ import AdminRoute from './components/Routes/AdminRoute.jsx';
 import UserPanel from './pages/User/UserPanel.jsx';
 import AdminPanel from './pages/Admin/AdminPanel.jsx';
 import RoomManagement from './pages/Admin/RoomManagement';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/panel" element={<AdminRoute/>}>
           <Route path='admin' element={<AdminPanel/>}/>
           <Route path='admin/gestionsalas' element={<RoomManagement/>}/>
+          <Route path='admin/profile' element={<EditProfile/>}/>
         </Route>
         <Route path='/rooms' element={<Rooms/>}/>
         <Route path='/rooms/:id' element={<EachRoom/>}/>
