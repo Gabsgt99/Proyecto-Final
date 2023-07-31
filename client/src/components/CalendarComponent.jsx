@@ -117,7 +117,7 @@ const CalendarComponent = ({ roomId, userRole }) => {
           startTime: '',
           endTime: ''
         });
-        setError('');
+        setError(''); // Limpia la alerta si la reserva se realiza exitosamente
 
         // Fetch updated events after creating the reservation
         fetchEvents();
@@ -206,6 +206,31 @@ const CalendarComponent = ({ roomId, userRole }) => {
     return true; // No hay superposición de horarios
   };
 
+  // Helper function para generar opciones de tiempo
+  const generateTimeOptions = (startTime, endTime, step) => {
+    const start = moment(startTime, 'HH:mm');
+    const end = moment(endTime, 'HH:mm');
+    const timeOptions = [];
+
+    while (start.isBefore(end)) {
+      timeOptions.push(start.format('HH:mm'));
+      start.add(step, 'minutes');
+    }
+
+    return timeOptions.map((time) => (
+      <option key={time} value={time}>
+        {time}
+      </option>
+    ));
+  };
+
+  // Agrega un efecto de limpieza para ocultar la alerta cuando se cierre el modal
+  useEffect(() => {
+    if (!showReservationModal) {
+      setError('');
+    }
+  }, [showReservationModal]);
+
   return (
     <div className='demo-app'>
       <div className='demo-app-main'>
@@ -287,21 +312,3 @@ const CalendarComponent = ({ roomId, userRole }) => {
 };
 
 export default CalendarComponent;
-
-// Helper function para generar opciones de tiempo
-const generateTimeOptions = (startTime, endTime, step) => {
-  const start = moment(startTime, 'HH:mm');
-  const end = moment(endTime, 'HH:mm');
-  const timeOptions = [];
-
-  while (start.isBefore(end)) {
-    timeOptions.push(start.format('HH:mm'));
-    start.add(step, 'minutes');
-  }
-
-  return timeOptions.map((time) => (
-    <option key={time} value={time}>
-      {time}
-    </option>
-  ));
-};
