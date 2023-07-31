@@ -16,7 +16,7 @@ const router = express.Router();
 // ROUTING WITH AUTH.
 
 // create booking || POST
-router.post( "/create-booking", requireSignIn, isAdmin, createBookingController);
+router.post( "/create-booking", requireSignIn, createBookingController);
 
 //update booking || PUT
 router.put("/update-booking/:id", requireSignIn, isAdmin, updateBookingController );

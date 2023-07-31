@@ -27,7 +27,7 @@ const Navbar = () => {
           <a onClick={handleClick} href="/">HOME</a>
           {/* {auth.user.isadmin ? ( */}
           <>
-          <a onClick={handleClick} href="#">Hola! {auth?.user?.name}</a>
+          <a onClick={(event) => {event.preventDefault() }} href="#">Hola! {auth?.user?.name}</a>
           <a onClick={handleClick} href="/">DASHBOARD</a>
           <a onClick={handleLogout} href="/">LOGOUT</a>
         </>

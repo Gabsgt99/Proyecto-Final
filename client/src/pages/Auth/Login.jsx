@@ -13,6 +13,11 @@ const Login = () => {
     const [auth, setAuth] = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+    const authStorage = JSON.parse(localStorage.getItem("auth"));
+    console.log(authStorage);
+    if(authStorage !== null){
+        navigate(location.state || "/rooms");
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();

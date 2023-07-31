@@ -9,7 +9,6 @@ const Rooms = () => {
     const getRooms = async () => {
         try {
             const authStorage = JSON.parse(localStorage.getItem("auth"));
-            console.log("=====");
             const { data } = await axios.get('/api/v1/rooms/get-rooms',{
                 method: "GET",
                 cors: true,
@@ -17,7 +16,6 @@ const Rooms = () => {
                     Authorization: authStorage.token,
                 }
             });
-            console.log(data);
             setRooms(data.rooms);
         } catch (error) {
             console.log(error);

@@ -22,6 +22,8 @@ const CalendarComponent = ({ roomId, userRole }) => {
     endTime: ''
   });
 
+  const authStorage = JSON.parse(localStorage.getItem("auth"));
+
   const handleDateSelect = (selectInfo) => {
     const { startStr } = selectInfo;
 
@@ -103,14 +105,14 @@ const CalendarComponent = ({ roomId, userRole }) => {
       }
 
       const newReservation = {
-        userId: '64a68b590e95b932adb3b733', // Assuming you have the user ID
+        userId: authStorage.user._id, // Assuming you have the user ID
         roomId: roomId,
         startDate: startTimeFormatted,
-        endDate: endTimeFormatted
+        endDate: endTimeFormatted,
       };
 
       try {
-        await axios.post('/api/v1/bookings/create-booking', newReservation);
+        await axios.post('http://localhost:8080/api/v1/bookings/create-booking', newReservation);
         setShowReservationModal(false);
         setReservationFormData({
           startDate: '',
@@ -169,7 +171,7 @@ const CalendarComponent = ({ roomId, userRole }) => {
       const bookings = res.data.bookings;
       const formattedEvents = bookings.map((booking) => ({
         id: booking._id,
-        title: 'Reservado',
+        title: authStorage.user.name,
         start: moment(booking.start_date).format('YYYY-MM-DDTHH:mm'),
         end: moment(booking.end_date).format('YYYY-MM-DDTHH:mm'),
         allDay: false

@@ -120,9 +120,7 @@ export const testController = (req, res) => {
 //EMAIL CONFIG
 //Send email for reset password
 export const sendPasswordLink = async(req,res) => {
-    console.log(req.body);
     const {email} = req.body;
-    console.log(email);
     if(!email){
         res.status(401).json({status:401,message:"Escriba su correo"})
     }

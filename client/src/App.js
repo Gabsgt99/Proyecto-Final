@@ -4,10 +4,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Importa el CSS de react-toastify
 import Login from './pages/Auth/Login.jsx';
 import Rooms from './pages/Rooms.jsx';
-import RoomManagement from './pages/RoomManagement';
+import RoomManagement from './pages/RoomManagement.jsx';
 import EachRoom from './pages/EachRoom.jsx';
-import UserBookings from './pages/UserBookings';
-import AdminBookings from './components/AdminBookings';
+import UserBookings from './pages/UserBookings.jsx';
+import AdminBookings from './components/AdminBookings.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import PasswordReset from './components/PasswordReset.jsx';
 import ForgotPassword from './components/ForgotPassword.jsx';

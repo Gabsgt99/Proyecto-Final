@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BiPencil, BiTrash } from "react-icons/bi";
 import axios from "axios";
 import { Button, Modal } from "react-bootstrap";
-import Layout from '../components/layout/Layout.jsx';
+import Layout from '../components/Layout/Layout.jsx';
 
 
 function RoomManagement() {
